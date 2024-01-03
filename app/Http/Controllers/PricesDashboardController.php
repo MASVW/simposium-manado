@@ -58,7 +58,7 @@ class PricesDashboardController extends Controller
     {
         $validatedData = $request->validate([
             'priceTag'=>['required','string'],
-            'price'=>['required','numeric'],
+            'price'=>['required'],
             'priceDesc' => ['required']
         ]);
         Prices::where('id', $request->id)->update($validatedData);

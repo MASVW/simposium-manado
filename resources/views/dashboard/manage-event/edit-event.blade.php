@@ -113,7 +113,8 @@
                         <form
                             action="/dashboard/manage-event/tag={{$events->slug}}/pricePut"
                             method="post"
-                            class="user">
+                            class="user"
+                            onsubmit="return unformatNumberBeforeSubmit();">
                             @method('put') @csrf
                             <div class="col-lg-12">
                                 <div class="text-center">
@@ -128,7 +129,7 @@
                                                 type="text"
                                                 class="form-control form-control-user @error('priceTag') is-invalid @enderror"
                                                 value="{{old('priceTag', $price->priceTag)}}"
-                                                id="exampleInputEmail"
+                                                id="priceTag"
                                                 aria-describedby="emailHelp"
                                                 name="priceTag">
                                                 @error('priceTag')
@@ -145,7 +146,7 @@
                                                     type="text"
                                                     class="form-control form-control-user @error('price') is-invalid @enderror"
                                                     value="{{old('price', $price->price)}}"
-                                                    id="exampleInputEmail"
+                                                    id="price"
                                                     aria-describedby="emailHelp"
                                                     name="price">
                                                     @error('price')
@@ -208,6 +209,36 @@
                                                 response => response.json()
                                             )
                                             .then(data => slug.value = data.slug)
+                                    });
+                                    // Fungsi untuk menghapus tanda titik sebelum mengirimkan nilai ke server
+                                    function unformatNumberBeforeSubmit() {
+                                        var priceInput = document.getElementById('price');
+                                        var unformattedValue = priceInput.value.replace(/\./g, '');
+
+                                        // Validasi untuk memastikan nilai yang diinput adalah numerik
+                                        if (isNaN(Number(unformattedValue))) {
+                                            alert('Invalid input. Please enter a numeric value.');
+                                            return false;
+                                        }
+
+                                        priceInput.value = unformattedValue;
+                                        return true;
+                                    }
+                                    // Fungsi untuk menghapus tanda titik sebelum menyimpan ke database
+                                    function unformatNumber(formattedNumber) {
+                                        return formattedNumber.replace(/\./g, '');
+                                    }
+
+                                    // Menangkap event input pada elemen dengan ID 'price'
+                                    document.getElementById('price').addEventListener('input', function() {
+                                        // Mengambil nilai input
+                                        var inputValue = this.value;
+
+                                        // Hapus tanda titik sebelum menyimpan ke database
+                                        var unformattedValue = unformatNumber(inputValue);
+
+                                        // Menampilkan nilai yang sudah diformat pada input
+                                        this.value = Number(unformattedValue).toLocaleString('id-ID');
                                     });
                                 </script>
 

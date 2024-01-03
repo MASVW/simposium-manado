@@ -15,16 +15,16 @@ class Navigation extends Controller
 {
     public function home(){
         $jobId = 1;
-        $event = 1;
+        $event = Events::where('status', 1)->with('prices')->first();
         return view('home',
     [
-        'id' => '1',
+        "id" => $event->id,
         "title" => "Home",
 
         "jobs" => Jobs::all(),
         "job" => Jobs::where('id', $jobId)->first(),
-        "event" => Prices::where('events_id', $event)->with('events')->first(),
-        "price" => Prices::where('events_id', $event)->where('job_id', $jobId)->with('events')->get()
+        "events" => $event,
+        "price" => Prices::where('events_id', $event['id'])->where('job_id', $jobId)->with('events')->get()
         
     ]);
     }
@@ -37,7 +37,7 @@ class Navigation extends Controller
         
         "jobs" => Jobs::all(),
         "job" => Jobs::where('id', $jobId)->first(),
-        "event" => Prices::where('events_id', $event->id)->with('events')->first(),
+        "events" => Events::where('id', $event->id)->with('prices')->first(),
         "price" => Prices::where('events_id', $event->id)->where('job_id', $jobId)->with('events')->get()
     ]);
     }
@@ -51,7 +51,7 @@ class Navigation extends Controller
 
         "jobs" => Jobs::all(),
         "job" => Jobs::where('id', $jobId)->first(),
-        "event" => Prices::where('events_id', $event->id)->with('events')->first(),
+        "events" => Events::where('id', $event->id)->with('prices')->first(),
         "price" => Prices::where('events_id', $event->id)->where('job_id', $jobId)->with('events')->get()
     ]);
     }
@@ -114,7 +114,7 @@ class Navigation extends Controller
             ]);
         }
     }
-    public function editingPass(Request $request){
+    public function editingPass(){
         {
             return view('profileEdit',[
                 'id'=> '1',

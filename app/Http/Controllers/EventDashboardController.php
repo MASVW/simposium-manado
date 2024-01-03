@@ -62,7 +62,7 @@ class EventDashboardController extends Controller
             'eventName'=>['required','string', 'min:10'],
             'excerpt'=>['required','string'],
             'eventDesc'=>['required','string'],
-            'img' => 'image|file|max: 5120',
+            // 'img' => 'image|file|max: 5120',
             'eventDate' => 'required'
         ];
 
@@ -70,17 +70,22 @@ class EventDashboardController extends Controller
             $rules['slug'] = 'required';
         };
 
-        if($request->file('img')){
+        $validatedData = $request->validate($rules);
+        if ($request->file('img')) {
             $image = $request->file('img');
             $imageName = $image->hashName();
             $imagePath = $image->store('events-images');
             $validatedData['img'] = $imageName;
-        };
-
+        } else {
+            // Tambahkan kondisi jika tidak ada gambar yang diunggah
+            // Misalnya, Anda ingin mempertahankan gambar yang sudah ada
+            // Anda dapat menyesuaikan bagian ini sesuai kebutuhan Anda
+            $validatedData['img'] = $events->img;
+        }
+    
         Events::where('id', $events->id)->update($validatedData);
-        return redirect ("/dashboard/manage-event/tag=$request->slug")->with("success","Events Has Updated!");
+        return redirect("/dashboard/manage-event/tag=$request->slug")->with("success", "Events Has Updated!");
     }
-
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Events::class, 'slug', $request->title);
