@@ -56,11 +56,13 @@ class PricesDashboardController extends Controller
      */
     public function update(Request $request, Events $events)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'priceTag'=>['required','string'],
             'price'=>['required'],
             'priceDesc' => ['required']
         ]);
+        $validatedData['price'] = str_replace('.', '', $validatedData['price']);
         Prices::where('id', $request->id)->update($validatedData);
         return redirect ("/dashboard/manage-event/tag=$events->slug")->with("success","Prices Has Updated!");
     }

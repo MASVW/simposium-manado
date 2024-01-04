@@ -129,7 +129,7 @@
                                                 </div>
                                                 <div class="d-flex flex-row">
                                                     <div class="p-2 flex-grow-1 align-content-start">
-                                                        {{$event->priceDesc}}
+                                                        {!!$event->priceDesc!!}
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-end">

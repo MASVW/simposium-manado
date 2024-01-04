@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('priceTag', 255)->nullable(false)->default('Please Input Price Tag');
             $table->decimal('price', 10, 2)->nullable(false)->default(0);
-            $table->string('priceDesc')->nullable(false)->default('Please Input Description');
+            $table->mediumText('priceDesc')->nullable(false)->default('Please Input Description');
             $table->foreignId('events_id');
             $table->foreignId('job_id')->nullable(true);
             $table->timestamps();

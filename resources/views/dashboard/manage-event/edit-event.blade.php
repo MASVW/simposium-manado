@@ -109,16 +109,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        @foreach($price as $price)
+                        @foreach($price as $priceItem)
                         <form
                             action="/dashboard/manage-event/tag={{$events->slug}}/pricePut"
                             method="post"
-                            class="user"
-                            onsubmit="return unformatNumberBeforeSubmit();">
+                            class="user">
                             @method('put') @csrf
                             <div class="col-lg-12">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{$price->priceTag}}</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{$priceItem->priceTag}}</h1>
                                     <hr></div>
                                 </div>
                                 <div class="row">
@@ -128,7 +127,7 @@
                                             <input
                                                 type="text"
                                                 class="form-control form-control-user @error('priceTag') is-invalid @enderror"
-                                                value="{{old('priceTag', $price->priceTag)}}"
+                                                value="{{old('priceTag', $priceItem->priceTag)}}"
                                                 id="priceTag"
                                                 aria-describedby="emailHelp"
                                                 name="priceTag">
@@ -140,39 +139,62 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <p>Price</p>
-                                            <div class="input-group">
-                                                <input
-                                                    type="text"
-                                                    class="form-control form-control-user @error('price') is-invalid @enderror"
-                                                    value="{{old('price', $price->price)}}"
-                                                    id="price"
-                                                    aria-describedby="emailHelp"
-                                                    name="price">
+                                                <p>Price</p>
+                                                <div class="input-group">
+                                                    <input
+                                                        style="margin-left: 10px;"
+                                                        type="text"
+                                                        class="form-control form-control-user @error('price') is-invalid @enderror"
+                                                        value="{{ old('price', isset($priceItem) ? number_format($priceItem->price, 0, ',', '.') : '') }}"
+                                                        id="price{{$priceItem->id}}"
+                                                        aria-describedby="emailHelp"
+                                                        name="price">
                                                     @error('price')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
+                                                <script>
+                                                    function unformatNumber(formattedNumber) {
+                                                        return formattedNumber.replace(/\./g, '');
+                                                    }
+
+                                                    document.getElementById('price{{$priceItem->id}}').addEventListener('input', function() {
+                                                        var inputValue = this.value;
+
+                                                        var unformattedValue = unformatNumber(inputValue);
+
+                                                        this.value = Number(unformattedValue).toLocaleString('id-ID');
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <p>Description</p>
                                             <textarea
+                                                id="editor{{$priceItem->id}}"
                                                 class="form-control mb-1 @error('priceDesc') is-invalid @enderror"
                                                 aria-label="With textarea"
                                                 rows="5"
-                                                name="priceDesc">{{old('priceDesc', $price->priceDesc)}}</textarea>
-                                            @error('priceDesc')
+                                                name="priceDesc">{{old('priceDesc', $priceItem->priceDesc)}}</textarea>
+                                            @error('priceDesc')                                            
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
                                             @enderror
+                                            <script>
+                                                ClassicEditor
+                                                    .create( document.querySelector( '#editor{{$priceItem->id}}' ) )
+                                                    .catch( error => {
+                                                        console.error( error );
+                                                    } );
+                                            </script>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="hidden" name="id" value="{{$price->id}}">
+                                                <input type="hidden" name="id" value="{{$priceItem->id}}">
                                                     <button type="submit" class="btn btn-primary btn-user btn-block mb-4">Save</button>
                                                 </form>
                                             </div>
@@ -182,12 +204,12 @@
                                                     method="post">
                                                     <!-- delete -->
                                                     @csrf
-                                                    <input type="hidden" name="id" value="{{$price->id}}">
+                                                    <input type="hidden" name="id" value="{{$priceItem->id}}">
                                                         <input type="hidden" name="slug" value="{{$events->slug}}">
                                                             <button
                                                                 type="submit"
                                                                 class="btn btn-danger btn-user btn-block mb-4"
-                                                                onclick="return confirm('Confirm Deleting {{$price->priceTag}}?')">Delete</button>
+                                                                onclick="return confirm('Confirm Deleting {{$priceItem->priceTag}}?')">Delete</button>
                                                         </form>
                                                     </div>
 
@@ -209,36 +231,6 @@
                                                 response => response.json()
                                             )
                                             .then(data => slug.value = data.slug)
-                                    });
-                                    // Fungsi untuk menghapus tanda titik sebelum mengirimkan nilai ke server
-                                    function unformatNumberBeforeSubmit() {
-                                        var priceInput = document.getElementById('price');
-                                        var unformattedValue = priceInput.value.replace(/\./g, '');
-
-                                        // Validasi untuk memastikan nilai yang diinput adalah numerik
-                                        if (isNaN(Number(unformattedValue))) {
-                                            alert('Invalid input. Please enter a numeric value.');
-                                            return false;
-                                        }
-
-                                        priceInput.value = unformattedValue;
-                                        return true;
-                                    }
-                                    // Fungsi untuk menghapus tanda titik sebelum menyimpan ke database
-                                    function unformatNumber(formattedNumber) {
-                                        return formattedNumber.replace(/\./g, '');
-                                    }
-
-                                    // Menangkap event input pada elemen dengan ID 'price'
-                                    document.getElementById('price').addEventListener('input', function() {
-                                        // Mengambil nilai input
-                                        var inputValue = this.value;
-
-                                        // Hapus tanda titik sebelum menyimpan ke database
-                                        var unformattedValue = unformatNumber(inputValue);
-
-                                        // Menampilkan nilai yang sudah diformat pada input
-                                        this.value = Number(unformattedValue).toLocaleString('id-ID');
                                     });
                                 </script>
 
