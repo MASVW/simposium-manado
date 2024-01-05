@@ -125,10 +125,11 @@
                         class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
+                    @if($title === 'Manage Event')
                     <div>
                         <a href="/dashboard/manage-event/addEvent" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Event</a>
                     </div>
+                    @endif
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 

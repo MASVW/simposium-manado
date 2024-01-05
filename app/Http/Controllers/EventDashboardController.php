@@ -41,7 +41,26 @@ class EventDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'slug' => 'required',
+            'excerpt'=>['required','string'],
+            'eventName'=>['required','string', 'min:10'],
+            'eventDesc'=>['required','string'],
+            'eventDate' => 'required',
+            'status' => 'required'
+        ];
+        $validatedData = $request->validate($rules);
+        if ($request->file('img')) {
+            $image = $request->file('img');
+            $imageName = $image->hashName();
+            $imagePath = $image->store('events-images');
+            $validatedData['img'] = $imageName;
+        } else {
+            $validatedData['img'] = null;
+        }
+    
+        Events::create($validatedData);
+        return redirect("/dashboard/manage-event/tag=$request->slug")->with("success", "Events Has Added!");
     }
 
     /**
@@ -69,7 +88,7 @@ class EventDashboardController extends Controller
             'eventName'=>['required','string', 'min:10'],
             'excerpt'=>['required','string'],
             'eventDesc'=>['required','string'],
-            // 'img' => 'image|file|max: 5120',
+            'status' => 'required',
             'eventDate' => 'required'
         ];
 

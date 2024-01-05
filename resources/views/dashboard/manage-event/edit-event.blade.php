@@ -336,6 +336,7 @@
                                                 id="editorExcerpt"
                                                 class="@error('excerpt') is-invalid @enderror"
                                                 aria-label="With textarea" style="width: auto; height: auto"
+                                                value="{{old('excerpt')}}"
                                                 rows="5">{{old('excerpt')}}</textarea>
                                             @error('excerpt')
                                             <div class="invalid-feedback">
@@ -357,6 +358,7 @@
                                                 id="editorEventDesc"
                                                 class="form-contro)l mb-4 @error('eventDesc') is-invalid @enderror"
                                                 aria-label="With textarea"
+                                                value="{{ old('eventDesc')}}"
                                                 rows="20">{{ old('eventDesc')}}</textarea>
                                             @error('eventDesc')
                                             <div class="invalid-feedback">
