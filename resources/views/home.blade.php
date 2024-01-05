@@ -19,7 +19,10 @@
                                 <div class="col-lg-12">
                                     <h6>{{ $events->eventDate }}</h6>
                                     <h2>{{ $events->eventName }}</h2>
-                                    <p>{{ $events->excerpt }}</p>
+                                    <?php $teks = $events->excerpt; $maxLength = 450; if (strlen($teks) > $maxLength) {
+                                        $teks = substr($teks, 0, $maxLength) . "...";
+                                    }?>
+                                    <span>{!! $teks !!}</span>
                                 </div>
                                 
                                 <div class="col-lg-12">
@@ -73,8 +76,8 @@
                         <span class="category">{{$events->slug}}</span>
                         <span class="date">{{$events->eventDate}}</span>
                         <h4>{{$events->eventName}}</h4>
-                        <div class="position-relative mt-2 overflow-auto" style="height: 400px;">
-                            <p>{{ $events->eventDesc }}</p>
+                        <div class="position-relative mt-2 overflow-auto" style="height: 800px;">
+                            <p>{!! $events->eventDesc !!}</p>
                         </div>
                         @auth
                         <span>

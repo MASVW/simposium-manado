@@ -134,13 +134,15 @@
             </div>
             <div class="card-body">
                 <p class="fs-1 text-primary fw-bold">Excerpt:</p>
-                {{ $event->excerpt }}
+                <div class="position-relative mt-2 overflow-auto" style="height: 300px;">
+                    <p>{!!$event->excerpt!!}</p>
+                </div>
                 <hr class="sidebar-divider">
                 <p class="fs-1 text-primary fw-bold">Slug: <em>{{$event->slug}}</em></p>
                 <hr class="sidebar-divider">
                 <p class="fs-1 text-primary fw-bold">Description:</p>
                 <div class="position-relative mt-2 overflow-auto" style="height: 300px;">
-                    <p>{{$event->eventDesc}}</p>
+                    <p>{!!$event->eventDesc!!}</p>
                 </div>
 
 
@@ -167,7 +169,7 @@
                             </div>
                             <div class="d-flex flex-row">
                                 <div class="p-2 flex-grow-1 align-content-start">
-                                {{$data2->priceDesc}}
+                                {!!$data2->priceDesc!!}
                                 </div>
                             </div>
                         </div>

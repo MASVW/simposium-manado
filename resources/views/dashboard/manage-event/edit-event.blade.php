@@ -1,3 +1,4 @@
+<?php use App\Models\Jobs; ?>
 @extends('dashboard.layouts.dash')
 @section('main') 
 <div class="row"> 
@@ -9,7 +10,11 @@
         </div>
         @endif
         <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">{{$events->eventName}}</h1>
+        @if($events->status  == 1)
+            <h1 class="h4 mb-4 font-weight-bold" style="color: #4e73df;">{{$events->eventName}}</h1>
+        @else
+            <h1 class="h4 mb-4 font-weight-bold" style="color: #e74a3b;">{{$events->eventName}}</h1>
+        @endif
             <hr></div>
             <form
                 action="/dashboard/manage-event/tag={{$events->id}}"
@@ -18,7 +23,17 @@
                 @method('put') @csrf
                 <div class="form-group">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label @error('img') is-invalid @enderror">Upload  Image</label>
+                        <label for="text">Status : </label>    
+                        <select aria-label="Default select example" name="status">
+                        @if($events->status  == 1)
+                            <option selected value="1" style="color: #4e73df;">Active</option>
+                            <option value="0" style="color: #e74a3b;">NonActive</option>
+                        @else
+                            <option value="1" style="color: #4e73df;">Active</option>
+                            <option selected value="0" style="color: #e74a3b;">Non - Active</option>
+                        @endif
+                        </select>
+                        <label style="margin-left: 15%;" for="formFile" class="form-label @error('img') is-invalid @enderror">Upload  Image</label>
                         <input class="form-control-user ps-5" type="file" name="img">
                         @error('img')
                         <div class="invalid-feedback">
@@ -59,7 +74,8 @@
                         <div class="input-group">
                             <textarea
                                 name="excerpt"
-                                class="form-control mb-4 @error('excerpt') is-invalid @enderror"
+                                id="editorExcerpt"
+                                class="@error('excerpt') is-invalid @enderror"
                                 aria-label="With textarea"
                                 rows="5">{{old('excerpt', $events->excerpt)}}</textarea>
                             @error('excerpt')
@@ -67,12 +83,20 @@
                                 {{$message}}
                             </div>
                             @enderror
+                            <script>
+                                ClassicEditor
+                                    .create(document.querySelector( '#editorExcerpt'))
+                                    .catch(error=> { 
+                                        console.error(error);
+                                    });
+                            </script>
                         </div>
-                        <p>Description</p>
+                        <p class="mt-3">Description</p>
                         <div class="input-group">
                             <textarea
                                 name="eventDesc"
-                                class="form-control mb-4 @error('eventDesc') is-invalid @enderror"
+                                id="editorEventDesc"
+                                class="form-contro)l mb-4 @error('eventDesc') is-invalid @enderror"
                                 aria-label="With textarea"
                                 rows="20">{{ old('eventDesc',$events->eventDesc)}}</textarea>
                             @error('eventDesc')
@@ -80,8 +104,15 @@
                                 {{$message}}
                             </div>
                             @enderror
+                            <script>
+                                ClassicEditor
+                                    .create( document.querySelector( '#editorEventDesc' ) )
+                                    .catch( error => {
+                                        console.error( error );
+                                    } );
+                            </script>
                         </div>
-                        <p>Date</p>
+                        <p class="mt-3">Date</p>
                         <input
                             value="{{ old('eventDate', $events->eventDate)}}"
                             class="form-control mb-4 @error('eventDate') is-invalid @enderror my-0"
@@ -190,8 +221,22 @@
                                                         console.error( error );
                                                     } );
                                             </script>
-                                            
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <p>Position: </p>
+                                                    <select class="form-select form-select-lg mb-3" name='job_id'>                                                        
+                                                        <?php $position = Jobs::where('id', $priceItem->job_id)->value('desc'); ?>
+                                                        <option selected>{{$position}}</option>
+                                                        @foreach($jobs as $job)
+                                                            <option value="{{ $job->id }}">{{ $job->desc }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <input type="hidden" name="id" value="{{$priceItem->id}}">

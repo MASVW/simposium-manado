@@ -4,15 +4,15 @@
 
 <?php 
 use App\Models\Bucket;
+use App\Models\Prices;
 
-$item = Bucket::where('users_id', auth()->user()->id)
+$item = Bucket::where('users_id', 1)
     ->with('prices', 'events', 'payments', "datas")
     ->whereHas('payments', function ($query) {
         $query->where('status', '=', 'Paid');
     })
     ->get();
-// $item = Payment::where('users_id', auth()->user()->id && 'status', 'Paid')
-//     ->with('buckets', 'events', 'payments')->get();
+    dd($item);
 $unsuccess = Bucket::where('users_id', auth()->user()->id)
     ->with('prices', 'events', 'payments')
     ->whereHas('payments', function ($query) {
@@ -20,6 +20,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
     })
     ->get();
 ?>
+
 <div
     class="main-banner wow fadeIn"
     id="top"
@@ -45,7 +46,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                     <th scope="col">Payment ID</th>
                                     <th scope="col">Event Name</th>
                                     <th scope="col">Event Date</th>
-                                    <th scope="col">Price Tag</th>
+                                    <th scope="col">Price</th>
                                     <th scope="col">Status</th>
                                     <th scope="col"></th>
                             </tr>
@@ -58,7 +59,8 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                 <th scope="row">{{$items->payments->id}}</th>
                                 <td>{{$items->events->eventName}}</td>
                                 <td>{{$items->events->eventDate}}</td>
-                                <td>{{$items->prices->priceDesc}}</td>
+                                <?php $price = number_format($items->prices->price, 2, ',', '.'); ?>
+                                <td>{{ $price }}</td>
                                 <td>{{$items->payments->status}}</td>
                                 <td>
                                         @if($items->datas->isFilled == 0)

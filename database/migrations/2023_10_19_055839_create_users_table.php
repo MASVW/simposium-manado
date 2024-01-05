@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('birthDate')->nullable();
             $table->string('password')->nullable(false);
             $table->boolean('isAdmin')->default(false);
-            $table->string('email')->nullable(false)->unique();
+            $table->string('emaiNl')->nullable(false)->unique();
             $table->timestamps();
         });
     }

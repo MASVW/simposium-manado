@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('buckets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
-            $table->foreignId('prices_id')->nullable(true);
+            $table->foreignId('prices_id')->nullable(true)->references('id')->on('prices');
             $table->foreignId('events_id')->nullable(true);
             $table->foreignId('payments_id')->nullable(true);
             $table->foreignId('datas_id')->nullable(true);

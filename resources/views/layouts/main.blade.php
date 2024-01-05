@@ -240,7 +240,15 @@
                                                     <div class="lg-12">
                                                         <h5>{{$data->events?->eventName}}</h5>
                                                         <p class="mt-2" style="font-weight: 600;">{{$data->prices?->priceTag}}</p>
-                                                        <p style="font-weight: 400;">{{$data->prices?->priceDesc}}</p>
+                                                        <?php
+                                                            $teks = $data->prices?->priceDesc;
+                                                            $maxLength = 100;
+
+                                                            if (strlen($teks) > $maxLength) {
+                                                                $teks = substr($teks, 0, $maxLength) . " ...";
+                                                            }
+                                                        ?>
+                                                        <p style="font-weight: 400;">{!!$teks!!}</p>
                                                         <p style="font-weight: 400;">Harga : IDR {{ number_format($data->prices?->price, 2, ',', '.')}}</p>
                                                     </div>
                                                 </div>
@@ -281,5 +289,26 @@
         <script src="/assets/js/animation.js"></script>
         <script src="/assets/js/imagesloaded.js"></script>
         <script src="/assets/js/custom.js"></script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var maxLength = 500;
+    var excerptElement = document.getElementById("excerptText");
+    var excerptHTML = excerptElement.innerHTML;
+
+    if (excerptHTML.length > maxLength) {
+        // Menemukan batas panjang untuk teks tanpa menghancurkan elemen HTML
+        var limitedHTML = excerptHTML.substring(0, maxLength);
+
+        // Mencari tempat terakhir elemen HTML
+        var lastHTMLIndex = limitedHTML.lastIndexOf('<');
+
+        // Mengambil potongan teks sejauh batas panjang tanpa memotong elemen HTML
+        var limitedText = excerptHTML.substring(0, lastHTMLIndex);
+
+        // Menetapkan teks yang telah dipotong dan ditambahkan "..."
+        excerptElement.innerHTML = limitedText + " ...";
+    }
+});
+</script>
     </body>
 </html>
