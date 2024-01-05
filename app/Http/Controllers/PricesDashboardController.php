@@ -60,7 +60,8 @@ class PricesDashboardController extends Controller
         $validatedData = $request->validate([
             'priceTag'=>['required','string'],
             'price'=>['required'],
-            'priceDesc' => ['required']
+            'priceDesc' => ['required'],
+            'job_id' => 'required'
         ]);
         $validatedData['price'] = str_replace('.', '', $validatedData['price']);
         Prices::where('id', $request->id)->update($validatedData);

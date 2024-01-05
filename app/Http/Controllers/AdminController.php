@@ -20,7 +20,7 @@ class AdminController extends Controller
         return view('dashboard.view', [
             "title" => "Event",
             // "event" => Events::all(),
-            "data" => Events::all(),
+            "data" => Events::where('status', 1)->get(),
 
         ]); 
         

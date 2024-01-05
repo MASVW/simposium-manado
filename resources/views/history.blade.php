@@ -12,7 +12,6 @@ $item = Bucket::where('users_id', 1)
         $query->where('status', '=', 'Paid');
     })
     ->get();
-    dd($item);
 $unsuccess = Bucket::where('users_id', auth()->user()->id)
     ->with('prices', 'events', 'payments')
     ->whereHas('payments', function ($query) {

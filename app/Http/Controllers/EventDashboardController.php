@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jobs;
 use App\Models\Prices;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class EventDashboardController extends Controller
         return view('dashboard.manage-event.edit-event', [
             "title" => "Manage Event",
             "events" => Events::where('id', $events->id)->first(),
-            "price" => Prices::where('events_id', $events['id'])->get()
+            "price" => Prices::where('events_id', $events['id'])->get(),
+            "jobs" => Jobs::all(),
         ]);
     }
 
@@ -26,7 +28,12 @@ class EventDashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.manage-event.edit-event', 
+        [
+            "title" => "Adding Event",
+            "events" => 0
+        ]
+    );
     }
 
     /**

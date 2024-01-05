@@ -61,7 +61,9 @@ Route::post('/bucket/delete', [BucketController::class, 'delete'])->middleware('
 Route::get('/dashboard/view-event', [AdminController::class, 'eventView'])->middleware('isAdmin');
 
 Route::get('/dashboard/manage-event', [AdminController::class, 'eventManage'])->middleware('isAdmin');
-Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])->middleware('isAdmin');
+
+Route::get('/dashboard/manage-event/addEvent', [EventDashboardController::class,'create'])->middleware('isAdmin');
+Route::post('/dashboard/manage-event/addEvent', [EventDashboardController::class,'index'])->middleware('isAdmin');
 
 Route::get('/dashboard/manage-event/tag={events:slug}', [EventDashboardController::class,'index'])->middleware('isAdmin');
 Route::put('/dashboard/manage-event/tag={events:id}', [EventDashboardController::class,'update'])->middleware('isAdmin');
@@ -71,6 +73,8 @@ Route::put('/dashboard/manage-event/tag={events:slug}/pricePut', [PricesDashboar
 Route::post('/dashboard/manage-event/tag={events:slug}/Addprice', [PricesDashboardController::class,'create'])->middleware();
 // delete
 Route::post('/dashboard/manage-event/tag={events:slug}/priceDelete', [PricesDashboardController::class,'destroy']);
+
+Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])->middleware('isAdmin');
 
 Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class,'authenticate']);

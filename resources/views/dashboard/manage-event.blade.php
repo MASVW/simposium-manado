@@ -31,7 +31,7 @@
                             <h6 class="mt-3 mb-2 font-weight-bold text-pmrimary">{{ $event->eventDate }}</h6>
                             <p class="fs-1 text-primary fw-bold">Excerpt:</p>
 
-                            <div class="position-relative mt-2 overflow-auto" style="height: 300px;">
+                            <div class="position-relative mt-2 overflow-auto" style="height: 100px;">
                                 <p>{!! $event->excerpt !!} </p>
                             </div>
                             

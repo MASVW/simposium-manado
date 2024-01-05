@@ -10,7 +10,7 @@
     use App\Models\Prices;
 
     $event1 = Events::find(1);
-    $event2 = Events::find(1);
+    $event2 = Events::find(2);
 
     $totalPaid = Bucket::whereHas('payments', function ($query) {
         $query->where('status', 'Paid');
@@ -18,7 +18,7 @@
         $query->where('eventName', $event1->eventName);
     })->count();
     $totalUnpaid = Bucket::whereHas('payments', function ($query) {
-        $query->where('status', 'Paid');
+        $query->where('status', 'Unpaid');
     })->whereHas('events', function ($query) use ($event1) {
         $query->where('eventName', $event1->eventName);
     })->count();
@@ -29,7 +29,7 @@
         $query->where('eventName', $event2->eventName);
     })->count();
     $totalUnpaid2 = Bucket::whereHas('payments', function ($query) {
-        $query->where('status', 'Paid');
+        $query->where('status', 'Unpaid');
     })->whereHas('events', function ($query) use ($event2) {
         $query->where('eventName', $event2->eventName);
     })->count();
@@ -47,7 +47,7 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Participant -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -55,7 +55,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     <p>{{$event1->eventName}}</p></div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Participants :  {{$totalPaid}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Paid :  {{$totalPaid}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="far fa-smile fa-2x text-gray-300"></i>
@@ -73,7 +73,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 {{$event1->eventName}}</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalUnpaid}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Unpaid: {{$totalUnpaid}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="far fa-frown fa-2x text-gray-300"></i>
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Participant -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$totalUnpaid2}}</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Paid :  {{$totalPaid2}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 {{$event2->eventName}}</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalUnpaid2}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Unpaid: {{$totalUnpaid2}}</div>
                             </div>
                             <div class="col-auto">
                             <i class="far fa-frown fa-2x text-gray-300"></i>
@@ -134,7 +134,7 @@
             </div>
             <div class="card-body">
                 <p class="fs-1 text-primary fw-bold">Excerpt:</p>
-                <div class="position-relative mt-2 overflow-auto" style="height: 300px;">
+                <div class="position-relative mt-2 overflow-auto" style="height: 100px;">
                     <p>{!!$event->excerpt!!}</p>
                 </div>
                 <hr class="sidebar-divider">
@@ -150,7 +150,7 @@
                 <hr class="sidebar-divider">
                 <h6 class="ms-5 font-weight-bold text-primary">Price List</h6>
             
-                <div class="position-relative mt-2 overflow-auto" style="height: 350px;">
+                <div class="position-relative mt-2 overflow-auto" style="height: 200px;">
                 @foreach (Prices::where('events_id', $event['id'])->with('events')->get() as $data2)
                     <span class="category">{{ $data2->priceTag }}</span>
                     <br>
@@ -165,11 +165,6 @@
                                 <span>
                                     Rp {{$data2->price}}
                                 </span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row">
-                                <div class="p-2 flex-grow-1 align-content-start">
-                                {!!$data2->priceDesc!!}
                                 </div>
                             </div>
                         </div>
