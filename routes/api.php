@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Gform;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/midtrans-callback', [PaymentController::class, 'callback']);
 Route::post('/midtrans-callback/{payments:id}', [PaymentController::class, 'callback']);
+
+Route::post('/gform/webhook', [Gform::class, 'update']);
+

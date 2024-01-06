@@ -122,9 +122,10 @@ class EventDashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Events::destroy("id", $request->id);
+        return redirect('/dashboard/manage-event');
     }
     
 }

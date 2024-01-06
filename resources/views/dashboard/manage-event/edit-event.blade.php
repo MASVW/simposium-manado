@@ -131,12 +131,24 @@
                                     <form
                                         action="/dashboard/manage-event/tag={{$events->slug}}/Addprice"
                                         method="post"
-                                        class="user">
+                                        class="user mb-4">
                                         @csrf
                                         <button
                                             type="submit"
                                             class="btn btn-secondary btn-user btn-block"
                                             onclick="return confirm('Confirm Adding New Price')">Add Price</button>
+                                    </form>
+                                    <form
+                                        action="/dashboard/manage-event/tag={{$events->slug}}/delete"
+                                        method="post"
+                                        class="user">
+                                        @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{$events->id}}">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-danger btn-user btn-block"
+                                            onclick="return confirm('Confirm Delete Event')">Delete Event</button>
                                     </form>
                                 </div>
                             </div>

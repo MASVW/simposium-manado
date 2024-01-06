@@ -171,6 +171,19 @@
                             <em></em>{{$event->eventDate}}</p>
                         @endforeach
                     </div>
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">All Events</h6>
+                        <div class="dropdown no-arrow"></div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        @foreach ($allEvent as $event)
+                        <h3>{{$event->eventName}}</h3>
+                        <p>
+                            <em></em>{{$event->eventDate}}</p>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

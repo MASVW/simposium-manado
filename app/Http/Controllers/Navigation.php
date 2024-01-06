@@ -16,17 +16,26 @@ class Navigation extends Controller
     public function home(){
         $jobId = 1;
         $event = Events::where('status', 1)->with('prices')->first();
-        return view('home',
-    [
-        "id" => $event->id,
-        "title" => "Home",
-
-        "jobs" => Jobs::all(),
-        "job" => Jobs::where('id', $jobId)->first(),
-        "events" => $event,
-        "price" => Prices::where('events_id', $event['id'])->where('job_id', $jobId)->with('events')->get()
+        if ($event == null) {
+            return view('home',
+            [
+                "id" => null,
+                "title" => "Home",
+            ]);
+        }
+        else {
+            return view('home',
+            [
+                "id" => $event->id,
+                "title" => "Home",
         
-    ]);
+                "jobs" => Jobs::all(),
+                "job" => Jobs::where('id', $jobId)->first(),
+                "events" => $event,
+                "price" => Prices::where('events_id', $event['id'])->where('job_id', $jobId)->with('events')->get()
+                
+            ]);
+        }
     }
     public function homePrice(Request $request, Events $event){
         $jobId = $request->job_id;

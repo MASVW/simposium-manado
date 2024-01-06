@@ -11,7 +11,8 @@ class AdminController extends Controller
     public function dashboard(){
         return view('dashboard.dashboard', [
             'title'=> 'Dashboard',
-            "event" => Events::all(),
+            "event" => Events::where('status', 1)->get(),
+            "allEvent" => Events::all(),
         ]);
 
     }

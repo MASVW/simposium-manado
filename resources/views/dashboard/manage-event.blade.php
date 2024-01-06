@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.dash')
 @section('manage-event')
+    @if(!$event->isEmpty())
     <div class="row">
         @foreach ($event as $event)
         <a href="">
@@ -49,4 +50,17 @@
             </a>
             @endforeach
     </div>
+    @else
+
+        <div class="container-fluid">
+
+                    <!-- 404 Error Text -->
+                    <div class="text-center">
+                        <p class="text-gray-500 mb-0">Currently, there are no active events.</p>
+                        <a href="/dashboard/manage-event/addEvent">&larr; Add Event</a>
+                    </div>
+                </div>
+                
+
+    @endif
 @endsection
