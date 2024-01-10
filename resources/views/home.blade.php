@@ -165,8 +165,8 @@
                                                                 <h6>{{ $event->priceTag }}</h6>
                                                             </div>
                                                             <div class="p-2 align-content-start">
-                                                                <span>
-                                                                    Rp
+                                                            Rp
+                                                                <span id="harga">
                                                                     {{$event->price}}
                                                                 </span>
                                                             </div>
@@ -184,7 +184,7 @@
                                                                     <input type="hidden" value="{{$event->events->id}}" name="events_id">
                                                                     <input type="hidden" value="{{$event->id}}" name="prices_id">
                                                                     <input type="hidden" value="{{auth()->user()->id}}" name="users_id">
-                                                                    <input type="hidden" value="{{$event->job_id}}" name="job_id">
+                                                                    <input type="hidden" value="{{$event->position_id}}" name="job_id">
                                                                     <button type="submit" class="btn btn-primary">ADD TO CHART</button>
                                                                 </div>
                                                             </form>

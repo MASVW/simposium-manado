@@ -290,25 +290,36 @@
         <script src="/assets/js/imagesloaded.js"></script>
         <script src="/assets/js/custom.js"></script>
         <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var maxLength = 500;
-    var excerptElement = document.getElementById("excerptText");
-    var excerptHTML = excerptElement.innerHTML;
+            document.addEventListener("DOMContentLoaded", function() {
+                var maxLength = 500;
+                var excerptElement = document.getElementById("excerptText");
+                var excerptHTML = excerptElement.innerHTML;
 
-    if (excerptHTML.length > maxLength) {
-        // Menemukan batas panjang untuk teks tanpa menghancurkan elemen HTML
-        var limitedHTML = excerptHTML.substring(0, maxLength);
+                if (excerptHTML.length > maxLength) {
+                    // Menemukan batas panjang untuk teks tanpa menghancurkan elemen HTML
+                    var limitedHTML = excerptHTML.substring(0, maxLength);
 
-        // Mencari tempat terakhir elemen HTML
-        var lastHTMLIndex = limitedHTML.lastIndexOf('<');
+                    // Mencari tempat terakhir elemen HTML
+                    var lastHTMLIndex = limitedHTML.lastIndexOf('<');
 
-        // Mengambil potongan teks sejauh batas panjang tanpa memotong elemen HTML
-        var limitedText = excerptHTML.substring(0, lastHTMLIndex);
+                    // Mengambil potongan teks sejauh batas panjang tanpa memotong elemen HTML
+                    var limitedText = excerptHTML.substring(0, lastHTMLIndex);
 
-        // Menetapkan teks yang telah dipotong dan ditambahkan "..."
-        excerptElement.innerHTML = limitedText + " ...";
-    }
-});
-</script>
+                    // Menetapkan teks yang telah dipotong dan ditambahkan "..."
+                    excerptElement.innerHTML = limitedText + " ...";
+                }
+            });
+            // Mengambil elemen HTML yang menampilkan nilai
+            var valueElement = document.getElementById('harga');
+
+            // Mendapatkan nilai asli
+            var originalValue = parseFloat(valueElement.innerHTML);
+
+            // Mengubah nilai ke dalam format yang diinginkan (dalam contoh ini, format dengan titik sebagai pemisah ribuan)
+            var formattedValue = originalValue.toLocaleString('id-ID', { minimumFractionDigits: 2 });
+
+            // Menetapkan nilai yang telah diformat ke dalam elemen HTML
+            valueElement.innerHTML = formattedValue;
+        </script>
     </body>
 </html>

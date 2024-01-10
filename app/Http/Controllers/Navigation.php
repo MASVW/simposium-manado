@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Events;
 use App\Models\Info;
+use App\Models\Position;
 use App\Models\Prices;
-use App\Models\Jobs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +29,10 @@ class Navigation extends Controller
                 "id" => $event->id,
                 "title" => "Home",
         
-                "jobs" => Jobs::all(),
-                "job" => Jobs::where('id', $jobId)->first(),
+                "jobs" => Position::all(),
+                "job" => Position::where('id', $jobId)->first(),
                 "events" => $event,
-                "price" => Prices::where('events_id', $event['id'])->where('job_id', $jobId)->with('events')->get()
+                "price" => Prices::where('events_id', $event['id'])->where('position_id', $jobId)->with('events')->get()
                 
             ]);
         }
@@ -44,10 +44,10 @@ class Navigation extends Controller
         'id' => $event->id,
         "title" => "Home",
         
-        "jobs" => Jobs::all(),
-        "job" => Jobs::where('id', $jobId)->first(),
+        "jobs" => Position::all(),
+        "job" => Position::where('id', $jobId)->first(),
         "events" => Events::where('id', $event->id)->with('prices')->first(),
-        "price" => Prices::where('events_id', $event->id)->where('job_id', $jobId)->with('events')->get()
+        "price" => Prices::where('events_id', $event->id)->where('position_id', $jobId)->with('events')->get()
     ]);
     }
     public function withId(Events $event)
@@ -58,10 +58,10 @@ class Navigation extends Controller
         'id'=> $event->id,
         "title" => 'Home',
 
-        "jobs" => Jobs::all(),
-        "job" => Jobs::where('id', $jobId)->first(),
+        "jobs" => Position::all(),
+        "job" => Position::where('id', $jobId)->first(),
         "events" => Events::where('id', $event->id)->with('prices')->first(),
-        "price" => Prices::where('events_id', $event->id)->where('job_id', $jobId)->with('events')->get()
+        "price" => Prices::where('events_id', $event->id)->where('position_id', $jobId)->with('events')->get()
     ]);
     }
 

@@ -43,7 +43,7 @@
                         <tr>
                             <th scope="row"></th>
                             <td style="width: 80%;"> </td>
-                            <td>Rp.  {{$item->prices->price}}</td>
+                            <td>Rp.  <span id="harga">{{$item->prices->price}}</span></td>
                             <td>
                                 <form action="{{route('delete_item')}}" method="post">
                                     @csrf
