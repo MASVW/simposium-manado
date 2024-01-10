@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->id();
-            $table->string("desc", 100);
-            $table->timestamps(false);
+        Schema::table('datas', function (Blueprint $table) {
+            $table->foreignId('bucket_id')->nullable(true)->references('id')->on('buckets')->after('payment_id');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::table('datas', function (Blueprint $table) {
+            //
+        });
     }
 };

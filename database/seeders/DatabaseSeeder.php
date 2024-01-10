@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Jobs;
 use Illuminate\Database\Seeder;
 
+use App\Models\Position;
 use App\Models\Buckets;
 use App\Models\Events;
 use App\Models\History;
@@ -24,33 +24,33 @@ class DatabaseSeeder extends Seeder
     {
         Events::factory(2)->create();
         Info::factory(1)->create();
-        Prices::factory(10)->create();
         User::create([
             "firstName" => 'Samuel',
             'lastName'=> 'Zakaria',
             'email' => 'samuelzakaria28@gmail.com',
             'password'=> Hash::make('NightFURY28'),
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Student',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Doctor',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Specialist',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Specialist-1 Program / PPDS',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Consultant',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Nurse',
         ]);
-        Jobs::create([
+        Position::create([
             "desc" => 'Midwife',
         ]);
+        Prices::factory(10)->create();
     }
 }

@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('datas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('bucket_id');
-            $table->foreignId('job_id');
-            $table->foreignId('payment_id');
+            $table->foreignId('position_id')->references('id')->on('positions');
+            $table->foreignId('user_id')->nullable(true)->references('id')->on('users');
+            $table->foreignId('payment_id')->nullable(true)->references('id')->on('payments');
             $table->boolean('isFilled')->default(false);;
             $table->string('fullName')->nullable(true);
             $table->string('phone')->nullable(true);
             $table->string('email')->nullable(true);
-            $table->boolean('attendance')->default(false);;
+            $table->boolean('attendance')->default(false);
             $table->timestamps();
         });
     }

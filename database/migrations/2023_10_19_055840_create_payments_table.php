@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
-            $table->foreignId('users_id');
+            $table->bigIncrements('id');
+            $table->foreignId('users_id')->nullable(true)->references('id')->on('users');
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->string('metode')->nullable(true);
             $table->decimal('total', 10, 2)->nullable(false);

@@ -22,7 +22,7 @@ class Prices extends Model
     public function events(){
         return $this->belongsTo(Events::class);
     }
-    public function jobs(){
-        return $this->belongsTo(Events::class);
+    public function positions(){
+        return $this->belongsTo(Position::class);
     }
 }

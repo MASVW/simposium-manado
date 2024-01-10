@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class Position extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'jobs';
+    protected $table = 'positions';
     protected $primaryKey = 'id';
     protected $keyType  = 'int';
     public $timestamps = false; 

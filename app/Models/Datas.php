@@ -22,8 +22,8 @@ class Datas extends Model
     public function buckets(){
         return $this->hasOne(Bucket::class);
     }
-    public function jobs(){
-        return $this->belongsTo(Jobs::class);
+    public function positions(){
+        return $this->belongsTo(Position::class);
     }
     public function payments(){
         return $this->belongsTo(Payment::class);
