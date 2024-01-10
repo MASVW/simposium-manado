@@ -129,7 +129,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Event Name</th>
                                 <th scope="col">Status</th>
                             </tr>
