@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\EventDashboardController;
+use App\Http\Controllers\ExcelExport;
 use App\Http\Controllers\FormControll;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CheckOutController;
@@ -92,3 +93,9 @@ Route::post('/signup', [SignUpController::class,'store'] );
 
 Route::get('/logout', [Navigation::class, 'home']);
 Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
+
+//Exporting Excel
+
+Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
+    ->name('excelExport')
+    ->middleware('isAdmin');
