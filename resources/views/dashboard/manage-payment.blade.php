@@ -12,7 +12,7 @@
         $query->where('status', 'Unpaid');
     })->latest()->count();
 
-    $showUserpaid = Bucket::whereNotNull('payments_id')->with('users', 'payments')->latest()->get()
+    $showUserpaid = Bucket::whereNotNull('payments_id')->with('users', 'payments')->latest()->get();
     // dd($showUserpaid);
 ?>
 

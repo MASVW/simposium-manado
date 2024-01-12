@@ -62,7 +62,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                 <td>{{ $price }}</td>
                                 <td>{{$items->payments->status}}</td>
                                 <td>
-                                        @if($items->datas->isFilled == 0)
+                                        @if($items->datas && $items->datas->isFilled == null)
                                             @if(!isset($printed[$items->payments->id]))
                                                 <?php $printed[$items->payments->id] = true; ?> 
                                                 <form action="/{{$items->payments_id}}/fillForm" method="get">
@@ -75,7 +75,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                                 </form>
                                             
                                             @endif
-                                        @elseif($items->datas->isFilled == 1)
+                                        @elseif($items->datas && $items->datas->isFilled == 1)
                                             @if(!isset($printed[$items->payments->id]))
                                                 <?php $printed[$items->payments->id] = false; ?> 
                                                     <form action="/{{$items->payments_id}}/fillForm" method="get">
@@ -126,8 +126,9 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                 </th>
                                 <td>{{$unsuccess->events->eventName}}</td>
                                 <td>{{$unsuccess->events->eventDate}}</td>
-                                <td>{{$unsuccess->prices->priceDesc}}</td>
-                                <td>{{$unsuccess->prices->price}}</td>
+                                <td>{!!$unsuccess->prices->priceDesc!!}</td>
+                                <?php $priceUnsuccess = number_format($unsuccess->prices->price, 2, ',', '.'); ?>
+                                <td>{{$priceUnsuccess}}</td>
                                 <td>{{$unsuccess->payments->status}}</td>
                             </tr>
                         </tbody>

@@ -76,14 +76,15 @@ class PaymentController extends Controller
                 
                 $order = Payment::find($request->order_id);
                 $order->update(['status' => 'Paid']);
-                $saved = Bucket::where("payments_id", $order->id)->with('prices')->get();
-                foreach ($saved as $saved) {
+                $savedItems = Bucket::where("payments_id", $order->id)->with('prices', 'events')->get();
+                foreach ($savedItems as $saved) {
                     $data = Datas::create([
                         "user_id"=> $saved->users_id,
                         "bucket_id"=> $saved->id,
-                        "job_id" => $saved->prices->job_id,
+                        "position_id" => $saved->prices->position_id,
                         "payment_id" => $saved->payments_id,
                         "isFilled" => 0,
+                        "eventName" => $saved->events->eventName,
                     ]);
                     $saved->update(['datas_id' => $data->id]);
                 }

@@ -14,8 +14,7 @@ class BucketController extends Controller
         $data = $request->except("_token", "job_id");
         Bucket::create($data);
         $jobId = $request->job_id;
-        return view('home',
-    [
+        return redirect("/tag={$event->slug}")->with([
         'id' => $event->id,
         "title" => "Home",
         
