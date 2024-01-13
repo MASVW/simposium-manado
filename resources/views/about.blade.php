@@ -19,10 +19,10 @@
                         <div class="about-right-content">
                             <div class="section-heading">
                                 <h6>About Us</h6>
-                                <h4>{{$info->infoName}}</h4>
+                                <h4>{!!$info->infoName!!}</h4>
                                 <div class="line-dec"></div>
                             </div>
-                            <p>{{$info->info}}</p>
+                            <p>{!!$info->info!!}</p>
                         </div>
                     </div>
                 </div>

@@ -6,22 +6,15 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
         
         <title>SM Admin | {{auth()->user()->firstName}}</title>
         
         <!-- Custom fonts for this template-->
-        <link
-        href="/vendor/fontawesome-free/css/all.min.css"
-        rel="stylesheet"
-        type="text/css">
-        <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         
         <!-- Custom styles for this template-->
         <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -66,7 +59,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Events
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -90,7 +83,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Addons
+                    Report
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -98,6 +91,21 @@
                     <a class="nav-link collapsed" href="/dashboard/manage-payment">
                         <i class="fas fa-dollar-sign"></i>
                         <span>Payment</span>
+                    </a>
+                </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Information
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item {{ ($title === 'Information') ? 'active' : ''}}">
+                    <a class="nav-link collapsed" href="/dashboard/manage-about">
+                        <i class="fas fa-info"></i>
+                        <span>Manage Information</span>
                     </a>
                 </li>
 
@@ -162,6 +170,7 @@
 
                 </nav>
                 @yield('main') @yield('view-event') @yield('manage-event') @yield('edit-event') @yield('manage-payment')
+                @yield('about')
                 <!-- Main Content -->
             </div>
         </div>

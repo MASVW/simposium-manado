@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\EventDashboardController;
@@ -79,6 +80,9 @@ Route::post('/dashboard/manage-event/tag={events:slug}/Addprice', [PricesDashboa
 Route::post('/dashboard/manage-event/tag={events:slug}/priceDelete', [PricesDashboardController::class,'destroy']);
 
 Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])->middleware('isAdmin');
+
+Route::get('/dashboard/manage-about', [AboutController::class, 'index'])->middleware('isAdmin');
+Route::put('/dashboard/manage-about', [AboutController::class, 'update'])->middleware('isAdmin');
 
 Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class,'authenticate']);
