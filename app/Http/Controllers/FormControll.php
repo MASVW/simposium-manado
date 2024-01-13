@@ -28,11 +28,10 @@ class FormControll extends Controller
           }
         }
         $i = count($data);
-        // dd($i);
         if ($i > 1) {
-          $saved = Datas::where("payment_id", $payments->id)->get();
+          $saved = Datas::where("payments_id", $payments->id)->get();
           foreach ($saved as $saved) {
-            Datas::where("bucket_id", $saved->bucket_id)->update([  
+            Datas::where("buckets_id", $saved->buckets_id)->update([  
                 "isFilled" => 1,              
                 "fullName" => $data[$saved->bucket_id][0],
                 "phone" => $data[$saved->bucket_id][1],
@@ -42,28 +41,15 @@ class FormControll extends Controller
         return redirect('/')->with('success', 'Filling Form!');
         }
         else{
-          $saved = Datas::where("payment_id", $payments->id)->first();
-          Datas::where("bucket_id", $saved->bucket_id)->update([  
+          $saved = Datas::where("payments_id", $payments->id)->first();
+          Datas::where("buckets_id", $saved->buckets_id)->update([  
             "isFilled" => 1,              
-            "fullName" => $data[$saved->bucket_id][0],
-            "phone" => $data[$saved->bucket_id][1],
-            "email" => $data[$saved->bucket_id][2]
+            "fullName" => $data[$saved->buckets_id][0],
+            "phone" => $data[$saved->buckets_id][1],
+            "email" => $data[$saved->buckets_id][2]
         ]);
         return redirect('/')->with('success', 'Filling Form!');
         }
         
       }
-    // public function store(Request $request, Payment $payments){
-    //     $data =[];
-    //     // Misalkan $request adalah data request yang Anda dapatkan dari form
-    //     foreach ($request as $key => $value) {
-    //         // Misalkan separator adalah tanda tanya (?)
-    //         $parts = explode ('?', $key);
-    //         // Jika key memiliki separator, maka tambahkan value ke dalam array $data dengan menggunakan id bucket sebagai indeks
-    //         if (count($parts) > 1) {
-    //         $data[$parts[1]][] = $value;
-    //         }
-    //     }
-    //     dd($data);
-    // }
 }

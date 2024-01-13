@@ -79,10 +79,10 @@ class PaymentController extends Controller
                 $savedItems = Bucket::where("payments_id", $order->id)->with('prices', 'events')->get();
                 foreach ($savedItems as $saved) {
                     $data = Datas::create([
-                        "user_id"=> $saved->users_id,
-                        "bucket_id"=> $saved->id,
-                        "position_id" => $saved->prices->position_id,
-                        "payment_id" => $saved->payments_id,
+                        "users_id"=> $saved->users_id,
+                        "buckets_id"=> $saved->id,
+                        "positions_id" => $saved->prices->position_id,
+                        "payments_id" => $saved->payments_id,
                         "isFilled" => 0,
                         "eventName" => $saved->events->eventName,
                     ]);

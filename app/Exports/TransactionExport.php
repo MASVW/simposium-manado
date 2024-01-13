@@ -58,12 +58,12 @@ class TransactionExport implements FromCollection, WithHeadings, WithStyles, Wit
     public function columnFormats(): array
     {
         return [
-            'A' => NumberFormat::FORMAT_NUMBER, // Format column A as text
-            'B' => NumberFormat::FORMAT_NUMBER, // Format column A as text
-            'C' => NumberFormat::FORMAT_TEXT, // Format column A as text
-            'D' => NumberFormat::FORMAT_TEXT, // Format column A as text
-            'E' => NumberFormat::FORMAT_NUMBER_00, // Format column A as text
-            'F' => NumberFormat::FORMAT_DATE_DATETIME, // Format column A as text
+            'A' => NumberFormat::FORMAT_NUMBER, 
+            'B' => NumberFormat::FORMAT_NUMBER, 
+            'C' => NumberFormat::FORMAT_TEXT, 
+            'D' => NumberFormat::FORMAT_TEXT, 
+            'E' => NumberFormat::FORMAT_NUMBER_00, 
+            'F' => NumberFormat::FORMAT_DATE_DATETIME, 
         ];
     }
     public function columnWidths(): array

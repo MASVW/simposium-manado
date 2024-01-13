@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('datas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('position_id')->references('id')->on('positions');
-            $table->foreignId('user_id')->nullable(true)->references('id')->on('users');
-            $table->foreignId('payment_id')->nullable(true)->references('id')->on('payments');
+            $table->foreignId('positions_id')->references('id')->on('positions');
+            $table->foreignId('users_id')->nullable(true)->references('id')->on('users');
+            $table->foreignId('payments_id')->nullable(true)->references('id')->on('payments');
             $table->boolean('isFilled')->default(false);;
             $table->string('fullName')->nullable(true);
             $table->string('phone')->nullable(true);

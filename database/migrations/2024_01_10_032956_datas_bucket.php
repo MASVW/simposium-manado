@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('datas', function (Blueprint $table) {
-            $table->foreignId('bucket_id')->nullable(true)->references('id')->on('buckets')->after('payment_id');
+            $table->foreignId('buckets_id')->nullable(true)->references('id')->on('buckets')->after('payment_id');
         });
     }
 

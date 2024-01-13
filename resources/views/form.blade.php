@@ -102,7 +102,7 @@
                                             <?php $job = Position::where("id", $bucket->prices->position_id)->first()?>
                                             <select class="form-select form-select-sm mb-3" name="job_id" disabled>
                                                 <option selected>Job: {{$job->desc}}</option>
-                                            </select>S
+                                            </select>
                                             @error('job')
                                             <div class="invalid-feedback">
                                                 {{$message}}
