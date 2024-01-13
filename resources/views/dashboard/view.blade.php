@@ -141,7 +141,7 @@
                             <form action="export-excel/participant" method="post">
                                 @csrf
                                 <input type="hidden" name="eventName" value="{{$event->eventName}}">
-                                <button class="btn btn-info mx-1 my-1 py-1 px-2" type="submit">Export Participant</button>
+                                <button class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm my-1" type="submit">Export Participant</button>
                             </form>
                         </div>
                     </div>

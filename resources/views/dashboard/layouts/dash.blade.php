@@ -130,6 +130,11 @@
                         <a href="/dashboard/manage-event/addEvent" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Event</a>
                     </div>
                     @endif
+                    @if($title === 'Dashboard')
+                    <div>
+                        <a href="/dashboard/export-excel" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Export Excel</a>
+                    </div>
+                    @endif
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
