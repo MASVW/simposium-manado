@@ -18,6 +18,9 @@ class Events extends Model
     public function prices(){
         return $this->hasMany(Prices::class);
     }
+    public function datas(){
+        return $this->hasMany(Datas::class);
+    }
 
     public function sluggable(): array
     {

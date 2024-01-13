@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('datas', function (Blueprint $table) {
-            $table->string('eventName')->after('email')->nullable(false);
+            $table->string('events_id')->after('email')->refrences('id')->on('events');
         });
     }
 

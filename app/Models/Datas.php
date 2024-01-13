@@ -28,5 +28,8 @@ class Datas extends Model
     public function payments(){
         return $this->belongsTo(Payment::class);
     }
+    public function events(){
+        return $this->belongsTo(Events::class);
+    }
 
 }

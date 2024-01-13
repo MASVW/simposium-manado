@@ -29,8 +29,9 @@ class ParticipantExport implements FromCollection, WithHeadings, WithStyles, Wit
     {
         $numberedParticipants = [];
         $i = 1;
-        $participants = Datas::where('eventName', $this->request->eventName)
-            ->with('positions')
+        
+        $participants = Datas::where('events_id', $this->request->id)
+            ->with('positions', 'events')
             ->get();
         foreach ($participants as $a) {
             $numberedParticipant = [
@@ -39,11 +40,11 @@ class ParticipantExport implements FromCollection, WithHeadings, WithStyles, Wit
                 'Email' => $a->email,
                 'No. Resi' => $a->payments_id,
                 'Pekerjaan' => $a->positions->desc,
-                'Acara' => $a->eventName,
+                'Acara' => $a->events->eventName,
             ];
             $numberedParticipants[] = $numberedParticipant;
             $i++;
-        }
+        };
         return collect($numberedParticipants);
     }
 

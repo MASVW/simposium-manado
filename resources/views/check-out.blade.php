@@ -47,6 +47,9 @@
                             <td>
                                 <form action="{{route('delete_item')}}" method="post">
                                     @csrf
+                                    <input type="hidden" name="buckets_id" value="{{$item->id}}">
+                                    <input type="hidden" name="payments_id" value="{{$item->payments_id}}">
+                                    <input type="hidden" name="datas_id" value="{{$item->datas_id}}">
                                     <button
                                         type="submit"
                                         name="delete"
@@ -64,12 +67,15 @@
             </div>
             <div class="col-lg-12">
               <div class="d-flex flex-row-reverse">
-                <form action="{{route('payment')}}" method="post">
-                  @csrf
-                  <button type="submit"  class="btn btn-primary">
-                    Check Out
-                  </button>
-                </form>
+              @if(!$payment)
+                <a href="/" class="btn btn-primary" role="button">
+                        Halaman Utama
+                </a>
+              @else
+                <a href="/{{$payment->id}}/fillForm" class="btn btn-primary" role="button">
+                    Fill Form!
+                </a>
+              @endif
               </div>
             </div>
         </div>
