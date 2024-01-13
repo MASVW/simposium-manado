@@ -1,4 +1,4 @@
-<?php use App\Models\Jobs;?>
+<?php use App\Models\Position;?>
 @extends('layouts.main') @section('form')
 
 <div id="contact" class="contact-us section">
@@ -99,10 +99,10 @@
                                         <input type="hidden" name="jobs?{{$bucket->id}}" value="{{$bucket->prices->job_id}}">
                                         <fieldset class="mt-4">
                                             <p class="text-start text-dark">Job</p>
-                                            <?php $job = Jobs::where("id", $bucket->prices->job_id)->first()?>
+                                            <?php $job = Position::where("id", $bucket->prices->position_id)->first()?>
                                             <select class="form-select form-select-sm mb-3" name="job_id" disabled>
                                                 <option selected>Job: {{$job->desc}}</option>
-                                            </select>
+                                            </select>S
                                             @error('job')
                                             <div class="invalid-feedback">
                                                 {{$message}}

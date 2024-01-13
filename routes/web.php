@@ -100,3 +100,7 @@ Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
 Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
     ->name('excelExport')
     ->middleware('isAdmin');
+    
+Route::post('dashboard/export-excel/participant', [ExcelExport::class, 'exportParticipant'])
+    ->name('excelExport')
+    ->middleware('isAdmin');

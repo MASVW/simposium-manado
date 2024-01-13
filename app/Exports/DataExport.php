@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Datas;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -15,8 +16,7 @@ class DataExport implements FromCollection, WithHeadings
             ->get([
                 'fullName',
                 'email',
-                
-            ])
+            ]);
     }
     public function headings(): array
     {
