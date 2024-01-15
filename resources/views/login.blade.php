@@ -39,7 +39,8 @@
                 class="col-lg-12 wow fadeInUp"
                 data-wow-duration="0.5s"
                 data-wow-delay="0.25s">
-                <form id="contact" action="/login" method="post">
+                
+                <form id="contact" method="POST" action="/">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
@@ -95,6 +96,13 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center mt-5">
+                                    <div class="flex items-center justify-end mt-4">
+                                            @if (Route::has('password.request'))
+                                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot your password?') }}
+                                                </a>
+                                            @endif
+                                        </div>
                                         <div class="col-lg-5">
                                             <fieldset>
                                                 <button type="submit" id="form-submit" class="main-button mt-0">Login</button>

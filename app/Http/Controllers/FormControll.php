@@ -21,6 +21,7 @@ class FormControll extends Controller
     public function store(Request $request, Payment $payments){
         
         $variabel = $request->except('_token');
+        
         $data = [];
 
         foreach ($variabel as $key => $value) {
@@ -31,7 +32,6 @@ class FormControll extends Controller
         }
 
         $i = count($data);
-
         if ($i > 1) {
           $saved = Datas::where("payments_id", $payments->id)->get();
           foreach ($saved as $saved) {

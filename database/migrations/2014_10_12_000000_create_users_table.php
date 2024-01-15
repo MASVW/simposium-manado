@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('firstName', 100)->nullable(false);
             $table->string('lastName', 100)->nullable(false);
             $table->date('birthDate')->nullable();
-            $table->string('password')->nullable(false);
+            $table->string('email')->unique();
             $table->boolean('isAdmin')->default(false);
-            $table->string('email')->nullable(false)->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
     }

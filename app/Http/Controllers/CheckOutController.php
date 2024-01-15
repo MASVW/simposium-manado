@@ -72,22 +72,42 @@ class CheckOutController extends Controller
     }
     public function delete(Request $request)
     {
-        $index = $request->input('delete');
+        $id = $request->id;
+        if ($id==1) {
+            $index = $request->input('delete');
 
-        $data = session('data');
+            $data = session('data');
+    
+            array_splice($data, $index, 1);
+    
+            session(['data' => $data]);
+            Bucket::where('id', $request->buckets_id)->delete();
+            Datas::where('id', $request->datas_id)->delete();
+            Payment::where('id', $request->payments_id)->delete();
+    
+            $payment = Payment::where('id', $request->payments_id)->first();
+    
+            return view("check-out",[
+                'title' => "Check Out",
+                'id' => 1
+            ], compact('payment'));  
+        }
+        else{
+            $index = $request->input('delete');
+            $data = session('data');
 
-        array_splice($data, $index, 1);
+            array_splice($data, $index, 1);
 
-        session(['data' => $data]);
-        Bucket::where('id', $request->buckets_id)->delete();
-        Datas::where('id', $request->datas_id)->delete();
-        Payment::where('id', $request->payments_id)->delete();
+            session(['data' => $data]);
+            Bucket::where('id', $request->buckets_id)->delete();
+            Datas::where('id', $request->datas_id)->delete();
 
-        $payment = Payment::where('id', $request->payments_id)->first();
+            $payment = Payment::where('id', $request->payments_id)->first();
 
-        return view("check-out",[
-            'title' => "Check Out",
-            'id' => 1
-        ], compact('payment'));
+            return view("check-out",[
+                'title' => "Check Out",
+                'id' => 1
+            ], compact('payment'));
+        };
     }
 }

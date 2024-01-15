@@ -4,6 +4,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BucketController;
+use App\Http\Controllers\ChangePass;
 use App\Http\Controllers\EventDashboardController;
 use App\Http\Controllers\ExcelExport;
 use App\Http\Controllers\FormControll;
@@ -13,7 +14,10 @@ use App\Http\Controllers\Navigation;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricesDashboardController;
 use App\Http\Controllers\SignUpController;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Navigation::class, 'home']);
-Route::get('/home', [Navigation::class, 'home'])->name('home')->middleware('guest');
+Route::get('/home', [Navigation::class, 'home'])->name('home');
 Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);
 Route::get('/tag={event:slug}', [Navigation::class, 'withId']);
 
@@ -36,6 +40,19 @@ Route::get('/history', [Navigation::class, 'history']);
 
 Route::get('/profile/edit', [Navigation::class, 'editProfile'])->middleware('auth');
 Route::post('/profile/edit', [Navigation::class, 'editing'])->middleware('auth');
+
+// Route::get('/forgot-password', [ChangePass::class, 'index'])->middleware('guest')->name('password.request');
+
+// Route::post('/forgot-password', [ChangePass::class, 'forgetPassword'])
+//     ->middleware('guest')
+//     ->name('password.email');
+// Route::post('/forgot-password', [ChangePass::class, 'forgetPassword'])
+//     ->middleware('guest')
+//     ->name('password.email');
+// Route::get('/reset-password/{token}', [ChangePass::class, 'showResetForm'])
+//     ->name('password.reset');
+// Route::put('/reset-password', [ChangePass::class, 'reset'])
+//     ->name('password.update');
 
 Route::get('/profile/edit/pass', [Navigation::class, 'editingPass'])->middleware('auth');
 Route::post('/profile/edit/pass', [Navigation::class, 'editPass'])->middleware('auth');
@@ -54,6 +71,8 @@ Route::post('/checkout/payment', [PaymentController::class, 'create'])->name('pa
 Route::post('/checkout/payment/{payments:id}', [PaymentController::class, 'update'])->middleware('auth');
 
 Route::get('/invoice/{payments:id}', [PaymentController::class, 'invoice'])->name('invoice')->middleware('auth');
+
+Route::get('/{payments:id}/viewForm', [FormControll::class, 'index'])->name('viewForm')->middleware('auth');
 
 Route::get('/{payments:id}/fillForm', [FormControll::class, 'index'])->name('form')->middleware('auth');
 Route::post('/{payments:id}/fillForm', [FormControll::class, 'store'])->middleware('auth');
@@ -84,8 +103,10 @@ Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])
 Route::get('/dashboard/manage-about', [AboutController::class, 'index'])->middleware('isAdmin');
 Route::put('/dashboard/manage-about', [AboutController::class, 'update'])->middleware('isAdmin');
 
-Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class,'authenticate']);
+Route::get('/login', [LoginController::class,'index'])->name('loginForm')->middleware('guest');
+Route::post('/login', [LoginController::class,'authenticate'])->middleware('guest');
+
+
 
 Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->name('google.callback');
@@ -93,7 +114,7 @@ Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->
 
 
 
-Route::get('/signup', [SignUpController::class,'index'])->middleware('guest');
+// Route::get('/signup', [SignUpController::class,'index'])->middleware('guest')->name('register');
 Route::post('/signup', [SignUpController::class,'store'] );
 
 Route::get('/logout', [Navigation::class, 'home']);
@@ -102,9 +123,9 @@ Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
 //Exporting Excel
 
 Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
-    ->name('excelExport')
+    ->name('excelExportAll')
     ->middleware('isAdmin');
     
 Route::post('dashboard/export-excel/participant', [ExcelExport::class, 'exportParticipant'])
-    ->name('excelExport')
+    ->name('excelExportParticipant')
     ->middleware('isAdmin');

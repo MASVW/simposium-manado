@@ -84,6 +84,8 @@
                                 <li class="scroll-to-section">
                                     <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">About Us</a>
                                 </li>
+
+
                                 @auth
                                 <div class="btn-group">
                                     <li class="mt-1">
@@ -118,6 +120,7 @@
                                         </a>
                                     </li>
                                     @endcan
+
                                     <li><hr class="dropdown-divider"></li>
                                     <form action="/logout" method="post">
                                         @csrf
@@ -129,14 +132,15 @@
                                     </form>
                                 </ul>
                             </div>
+
                             @else
                             <li class="scroll-to-section">
                                 <a href="/login" class="{{ ($title === 'Login') ? 'active' : ''}}">Login</a>
                             </li>
                             <li class="scroll-to-section">
-                                <div class="border-first-button">
-                                    <a href="/signup" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Sign Up Now!</a>
-                                </div>
+                                    <div class="border-first-button">
+                                        <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Sign Up Now!</a>
+                                    </div>
                             </li>
                             @endauth
 
@@ -151,7 +155,7 @@
         
         @yield('main') @yield('check-out') @yield('aboutUs') @yield('login')
         @yield('signUp') @yield('payment') @yield('invoice') @yield('profile')
-        @yield('editProfile') @yield('form') @yield('history')
+        @yield('editProfile') @yield('form') @yield('history')@yield('forgot-password')
         
 
         <!-- Button trigger modal -->

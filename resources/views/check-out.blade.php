@@ -15,6 +15,7 @@
         use App\Models\Bucket;
         use Illuminate\Support\Facades\Session;
         $item = Bucket::whereIn('id', (array) Session::get('data'))->with('prices', 'events')->get();
+        $totalItems = $item->count();
 
         ?>
                 </div>
@@ -50,6 +51,7 @@
                                     <input type="hidden" name="buckets_id" value="{{$item->id}}">
                                     <input type="hidden" name="payments_id" value="{{$item->payments_id}}">
                                     <input type="hidden" name="datas_id" value="{{$item->datas_id}}">
+                                    <input type="hidden" name="id" value="{{$totalItems}}">
                                     <button
                                         type="submit"
                                         name="delete"

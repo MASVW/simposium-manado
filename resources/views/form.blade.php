@@ -55,6 +55,7 @@
                                         <fieldset class="mt-4">
                                             <p class="text-start text-dark">Full Name</p>
                                             <input
+                                            value=""
                                                 class="form-control @error('fullName') is-invalid @enderror my-0"
                                                 type="text"
                                                 name="fullName?{{$bucket->id}}"

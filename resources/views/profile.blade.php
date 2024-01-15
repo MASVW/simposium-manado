@@ -73,12 +73,9 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    <form action="/checkout/payment/{{$unsuccess->payments->id}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-link">
+                                        <u style="color: blue;"><a href="/{{$unsuccess->payments->id}}/fillForm" style="color: blue">
                                             {{$unsuccess->payments->id}}
-                                        </button>
-                                    </form>
+                                        </a></u>
                                 </th>
                                 <td>{{$unsuccess->events->eventName}}</td>
                                 <td>{{$unsuccess->events->eventDate}}</td>

@@ -125,9 +125,9 @@
                                     <button type="button" class="btn btn-primary text-body-emphasis mt-5">Register Now!</button>
                                 </span>
                                 @else
-                                <span>
+                                <!-- <span>
                                     <button type="button" class="btn btn-primary text-body-emphasis mt-5" disabled>Register Now!</button>
-                                </span>
+                                </span> -->
                                 @endauth
                             </div>
                             <!-- <div class="border-first-button"><a href="#contact">Register Now!</a></div>

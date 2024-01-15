@@ -113,7 +113,7 @@ class PaymentController extends Controller
             'title' => "Check Out",
             'id' => 1,
             'snapToken' => $snapToken,
-            'payment' => $payments
+            'payments' => $payments
         ]);
     }
 }

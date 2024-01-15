@@ -47,12 +47,11 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                     <th scope="col">Event Date</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">View Form</th>
                             </tr>
                         </thead>
                         <?php $i=0; $printed = array();?>
                         @foreach($item as $items)
-                        <?php $i++?>
                         <tbody>
                             <tr>
                                 <th scope="row">{{$items->payments->id}}</th>
@@ -61,35 +60,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                 <?php $price = number_format($items->prices->price, 2, ',', '.'); ?>
                                 <td>{{ $price }}</td>
                                 <td>{{$items->payments->status}}</td>
-                                <td>
-                                        @if($items->datas && $items->datas->isFilled == null)
-                                            @if(!isset($printed[$items->payments->id]))
-                                                <?php $printed[$items->payments->id] = true; ?> 
-                                                <form action="/{{$items->payments_id}}/fillForm" method="get">
-                                                @csrf
-                                                    <li>
-                                                        <button class="btn btn-primary" type="submit">
-                                                            <i class="bi bi-box-arrow-right me-2"></i>Fill Form
-                                                        </button>
-                                                    </li>
-                                                </form>
-                                            
-                                            @endif
-                                        @elseif($items->datas && $items->datas->isFilled == 1)
-                                            @if(!isset($printed[$items->payments->id]))
-                                                <?php $printed[$items->payments->id] = false; ?> 
-                                                    <form action="/{{$items->payments_id}}/fillForm" method="get">
-                                                    @csrf
-                                                    <li>
-                                                        <button class="btn btn-primary" type="submit" disabled>
-                                                            <i class="bi bi-box-arrow-right me-2"></i>Fill Form
-                                                        </button>
-                                                    </li>
-                                                </form>
-                                            
-                                            @endif
-                                        @endif
-                                </td>
+                                <td><a href="/{{$items->payments->id}}/viewForm" class="btn btn-primary">View Form</a></td>
                             </tr>
                         </tbody>
                         @endforeach
