@@ -40,7 +40,7 @@
                 data-wow-duration="0.5s"
                 data-wow-delay="0.25s">
                 
-                <form id="contact" method="POST" action="/">
+                <form id="contact" method="POST" action="{{ routes('login') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
@@ -96,25 +96,31 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center mt-5">
-                                    <div class="flex items-center justify-end mt-4">
-                                            @if (Route::has('password.request'))
-                                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot your password?') }}
-                                                </a>
-                                            @endif
-                                        </div>
                                         <div class="col-lg-5">
                                             <fieldset>
                                                 <button type="submit" id="form-submit" class="main-button mt-0">Login</button>
                                             </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <fieldset>
+                                                <button id="form-submit" class="main-button mt-0">Hai</button>
+                                            </fieldset>
                                         </div>
                                     </div>
+                                    <div class="flex items-center justify-end mt-4">
+    @if (Route::has('password.request'))
+        <a class="underline text-xs text-gray-500 hover:text-gray-700" href="{{ route('password.request') }}">
+            {{ __('Forgot your password?') }}
+        </a>
+    @endif
+</div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                
             </div>
         </div>
     </div>

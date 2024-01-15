@@ -1,70 +1,165 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-label for="firstName" value="Nama Depan" />
-                <x-input id="firstName" class="block mt-1 w-full" type="text" name="firstName" :value="old('firstName')" required autofocus autocomplete="firstName" />
+<?php  $id = 1;
+  $title = 'Sign Up'; ?>
+@extends('layouts.main') @section('signUp')
+<div id="contact" class="contact-us section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div
+                    class="section-heading wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.5s">
+                    <h6>Sign Up</h6>
+                    <h4>
+                        <em>Hi There!</em>
+                        We Happy To See You!</h4>
+                    <div class="line-dec"></div>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-label for="lastName" value="Nama Belakang" />
-                <x-input id="lastName" class="block mt-1 w-full" type="text" name="lastName" :value="old('lastName')" required autofocus autocomplete="lastName" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="birthDate" value="Tanggal Lahir" />
-                <x-input id="birthDate" class="block mt-1 w-full" type="date" name="birthDate" :value="old('birthDate')" required autofocus autocomplete="birthDate" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
+            <div
+                class="col-lg-12 wow fadeInUp"
+                data-wow-duration="0.5s"
+                data-wow-delay="0.25s">
+                <form id="contact" action="{{route('register')}}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="contact-dec">
+                                <img src="assets/images/contact-dec-v3.png" alt="">
                             </div>
                         </div>
-                    </x-label>
-                </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
+                        <div class="col-lg-5" style="margin-top: 10%;">
+                            <img src="assets/images/animation/signup.svg">
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="fill-form">
+                                <div class="row">
+                                    <h1 class="text-center my-4 text-primary">Simposium Manado</h1>
+                                    <div class="col-lg-7">
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">First Name</p>
+                                            <input
+                                                value="{{old ('firstName')}}"
+                                                class="form-control @error('firstName') is-invalid @enderror my-0"
+                                                type="text"
+                                                name="firstName"
+                                                placeholder="First Name"
+                                                autocomplete="on"
+                                                required="true">
+                                            @error('firstName')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Last Name</p>
+                                            <input
+                                                value="{{old ('lastName')}}"
+                                                class="form-control @error('lastName') is-invalid @enderror my-0"
+                                                type="text"
+                                                name="lastName"
+                                                placeholder="Last Name"
+                                                autocomplete="on"
+                                                required="true">
+                                            @error('lastName')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Email</p>
+                                            <input
+                                                value="{{old ('email')}}"
+                                                class="form-control @error('email') is-invalid @enderror my-0"
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                required="true">
+                                            @error('email')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Birth Date</p>
+                                            <input
+                                                value="{{old ('birthDate')}}"
+                                                class="form-control @error('birthDate') is-invalid @enderror my-0"
+                                                type="date"
+                                                name="birthDate"
+                                                required="true">
+                                            @error('birthDate')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Password</p>
+                                            <input
+                                                class="form-control @error('password') is-invalid @enderror my-0"
+                                                type="Password"
+                                                name="password"
+                                                placeholder="Password"
+                                                autocomplete="on"
+                                                required="true" caption>
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Password</p>
+                                            <input
+                                                class="form-control @error('password') is-invalid @enderror my-0"
+                                                type="Password"
+                                                name="password_confirmation"
+                                                placeholder="Konfirmasi Password"
+                                                autocomplete="on"
+                                                required="true" caption>
+                                            <div class="form-text text-start" id="basic-addon4">
+                                                <ul>
+                                                    <li>*Gabungan huruf besar & kecil, minimal 8 karakter</li>
+                                                    <li>*Mencakup angka</li>
+                                                </ul>
+                                            </div>
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-5">
+                                        <div class="col-lg-5">
+                                            <fieldset>
+                                                <input type="hidden" name="isAdmin" value="false">
+                                                <button type="submit" id="form-submit" class="main-button mt-0">Sign Up!</button>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="col-lg-5 mb-5">
+                                                <p class="text-start text-dark mb-0 fw-light" style="font-size:small">
+                                                Sudah punya akun? <a href="{{route('login')}}">Masuk sekarang!</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="d-flex justify-content-center mt-0">
+                                        <br>
+                                        <br>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        </div>
+    </div>
+</div>
+@endsection

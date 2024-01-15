@@ -18,7 +18,7 @@
                 class="col-lg-12 wow fadeInUp"
                 data-wow-duration="0.5s"
                 data-wow-delay="0.25s">
-                <form id="contact" action="/signup" method="post">
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">

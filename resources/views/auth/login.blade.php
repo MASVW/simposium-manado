@@ -1,48 +1,133 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<?php 
+    $id=1;
+    $title="Login"
+?>
+@extends('layouts.main') @section('login')
+<div id="contact" class="contact-us section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div
+                    class="section-heading wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.5s">
 
-        <x-validation-errors class="mb-4" />
+                    @if(session()->has('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif @if(session()->has('loginEror'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('loginEror') }}
+                    </div>
+                    @endif
+                    @if(session()->has('googleError'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('googleError') }}
+                    </div>
+                    @endif
+                    @if(session()->has('internalError'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('internalError') }}
+                    </div>
+                    @endif
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+                    <h6>Login</h6>
+                    <h4>
+                        <em>Hi
+                        </em>Welcome Back!</h4>
+                    <div class="line-dec"></div>
+                </div>
             </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <div
+                class="col-lg-12 wow fadeInUp"
+                data-wow-duration="0.5s"
+                data-wow-delay="0.25s">
+                
+                <form id="contact" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="contact-dec">
+                                <img src="assets/images/contact-dec-v3.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-5" style="margin-top: 2%;">
+                            <div id="image">
+                                <img src="assets/images/animation/login.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="fill-form">
+                                <div class="row">
+                                    <h1 class="text-center my-4 text-primary">Simposium Manado</h1>
+                                    <div class="col-lg-7">
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Email</p>
+                                            <input
+                                                value="{{old('email')}}"
+                                                class="my-0 @error('email') is-invalid @enderror"
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                autofocus="autofocus"
+                                                required="true">
+                                            @error('email')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                        <fieldset class="mt-4">
+                                            <p class="text-start text-dark">Password</p>
+                                            <input
+                                                class="my-0 @error('password') is-invalid @enderror"
+                                                type="password"
+                                                name="password"
+                                                placeholder="Password"
+                                                required="true">
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <p class=" text-dark  mt-4 mb-2">Login With Google</p>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="auth/google"><img src="assets/images/icon/google.png" width="auto" height="50px"></a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-5">
+                                        <div class="col-lg-5">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <button type="submit">Masuk</button>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-0">
+                                        <div class="col-lg-5 mt-0">
+                                            <div class="row">
+                                                <div class="col-lg-12 mt-0">
+                                                    <a href="{{ route('password.request') }}" class="btn btn-link" style="font-size:small;">Lupa Password?</a>
+                                                </div>
+                                                <div class="col-lg-12 mt-0">
+                                                    <a href="{{ route('register') }}" class="btn btn-link" style="font-size:small;">Buat akun?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
             </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        </div>
+    </div>
+</div>
+@endsection

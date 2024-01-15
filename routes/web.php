@@ -41,19 +41,6 @@ Route::get('/history', [Navigation::class, 'history']);
 Route::get('/profile/edit', [Navigation::class, 'editProfile'])->middleware('auth');
 Route::post('/profile/edit', [Navigation::class, 'editing'])->middleware('auth');
 
-// Route::get('/forgot-password', [ChangePass::class, 'index'])->middleware('guest')->name('password.request');
-
-// Route::post('/forgot-password', [ChangePass::class, 'forgetPassword'])
-//     ->middleware('guest')
-//     ->name('password.email');
-// Route::post('/forgot-password', [ChangePass::class, 'forgetPassword'])
-//     ->middleware('guest')
-//     ->name('password.email');
-// Route::get('/reset-password/{token}', [ChangePass::class, 'showResetForm'])
-//     ->name('password.reset');
-// Route::put('/reset-password', [ChangePass::class, 'reset'])
-//     ->name('password.update');
-
 Route::get('/profile/edit/pass', [Navigation::class, 'editingPass'])->middleware('auth');
 Route::post('/profile/edit/pass', [Navigation::class, 'editPass'])->middleware('auth');
 
@@ -103,9 +90,6 @@ Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])
 Route::get('/dashboard/manage-about', [AboutController::class, 'index'])->middleware('isAdmin');
 Route::put('/dashboard/manage-about', [AboutController::class, 'update'])->middleware('isAdmin');
 
-Route::get('/login', [LoginController::class,'index'])->name('loginForm')->middleware('guest');
-Route::post('/login', [LoginController::class,'authenticate'])->middleware('guest');
-
 
 
 Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])->name('google.login');
@@ -113,9 +97,6 @@ Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->
 
 
 
-
-// Route::get('/signup', [SignUpController::class,'index'])->middleware('guest')->name('register');
-Route::post('/signup', [SignUpController::class,'store'] );
 
 Route::get('/logout', [Navigation::class, 'home']);
 Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
