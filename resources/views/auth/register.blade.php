@@ -9,10 +9,10 @@
                     class="section-heading wow fadeIn"
                     data-wow-duration="1s"
                     data-wow-delay="0.5s">
-                    <h6>Sign Up</h6>
+                    <h6>Daftar</h6>
                     <h4>
-                        <em>Hi There!</em>
-                        We Happy To See You!</h4>
+                        <em>Halo,</em>
+                        Senang bertemu denganmu!</h4>
                     <div class="line-dec"></div>
                 </div>
             </div>
@@ -37,13 +37,13 @@
                                     <h1 class="text-center my-4 text-primary">Simposium Manado</h1>
                                     <div class="col-lg-7">
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">First Name</p>
+                                            <p class="text-start text-dark">Nama Depan</p>
                                             <input
                                                 value="{{old ('firstName')}}"
                                                 class="form-control @error('firstName') is-invalid @enderror my-0"
                                                 type="text"
                                                 name="firstName"
-                                                placeholder="First Name"
+                                                placeholder="Masukkan nama depan"
                                                 autocomplete="on"
                                                 required="true">
                                             @error('firstName')
@@ -53,13 +53,13 @@
                                             @enderror
                                         </fieldset>
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">Last Name</p>
+                                            <p class="text-start text-dark">Nama Belakang</p>
                                             <input
                                                 value="{{old ('lastName')}}"
                                                 class="form-control @error('lastName') is-invalid @enderror my-0"
                                                 type="text"
                                                 name="lastName"
-                                                placeholder="Last Name"
+                                                placeholder="Masukkan nama belakang"
                                                 autocomplete="on"
                                                 required="true">
                                             @error('lastName')
@@ -69,13 +69,13 @@
                                             @enderror
                                         </fieldset>
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">Email</p>
+                                            <p class="text-start text-dark">Alamat surel</p>
                                             <input
                                                 value="{{old ('email')}}"
                                                 class="form-control @error('email') is-invalid @enderror my-0"
                                                 type="email"
                                                 name="email"
-                                                placeholder="Email"
+                                                placeholder="Masukkan alamt surel"
                                                 required="true">
                                             @error('email')
                                             <div class="invalid-feedback">
@@ -84,7 +84,7 @@
                                             @enderror
                                         </fieldset>
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">Birth Date</p>
+                                            <p class="text-start text-dark">Tanggal Lahir</p>
                                             <input
                                                 value="{{old ('birthDate')}}"
                                                 class="form-control @error('birthDate') is-invalid @enderror my-0"
@@ -98,12 +98,12 @@
                                             @enderror
                                         </fieldset>
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">Password</p>
+                                            <p class="text-start text-dark">Sandi</p>
                                             <input
                                                 class="form-control @error('password') is-invalid @enderror my-0"
                                                 type="Password"
                                                 name="password"
-                                                placeholder="Password"
+                                                placeholder="Masukkan sandi"
                                                 autocomplete="on"
                                                 required="true" caption>
                                             @error('password')
@@ -113,12 +113,12 @@
                                             @enderror
                                         </fieldset>
                                         <fieldset class="mt-4">
-                                            <p class="text-start text-dark">Password</p>
+                                            <p class="text-start text-dark">Konfirmasi Sandi</p>
                                             <input
                                                 class="form-control @error('password') is-invalid @enderror my-0"
                                                 type="Password"
                                                 name="password_confirmation"
-                                                placeholder="Konfirmasi Password"
+                                                placeholder="Konfirmasi sandi"
                                                 autocomplete="on"
                                                 required="true" caption>
                                             <div class="form-text text-start" id="basic-addon4">
@@ -138,7 +138,7 @@
                                         <div class="col-lg-5">
                                             <fieldset>
                                                 <input type="hidden" name="isAdmin" value="false">
-                                                <button type="submit" id="form-submit" class="main-button mt-0">Sign Up!</button>
+                                                <button type="submit" id="form-submit" class="main-button mt-0">Daftar Sekarang!</button>
                                             </fieldset>
                                         </div>
                                     </div>

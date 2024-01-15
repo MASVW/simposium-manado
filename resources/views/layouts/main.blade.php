@@ -41,6 +41,19 @@
         <link rel="stylesheet" href="/assets/css/animated.css">
         <link rel="stylesheet" href="/assets/css/owl.css">
         <!-- TemplateMo 568 DigiMedia https://templatemo.com/tm-568-digimedia -->
+        <style>
+            .custom-button {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .custom-button a {
+                width: 100%;
+            }
+        </style>
         
     </head>
 
@@ -82,7 +95,7 @@
                                 </li>
                                 @endforeach
                                 <li class="scroll-to-section">
-                                    <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">About Us</a>
+                                    <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a>
                                 </li>
 
 
@@ -135,11 +148,11 @@
 
                             @else
                             <li class="scroll-to-section">
-                                <a href="/login" class="{{ ($title === 'Login') ? 'active' : ''}}">Login</a>
+                                <a href="{{ route('login') }}" class="{{ ($title === 'Login') ? 'active' : ''}}">Masuk</a>
                             </li>
                             <li class="scroll-to-section">
                                     <div class="border-first-button">
-                                        <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Sign Up Now!</a>
+                                        <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Daftar Sekarang!</a>
                                     </div>
                             </li>
                             @endauth
@@ -198,7 +211,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Your Bucket</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Keranjangmu</h1>
                         <button
                             type="button"
                             class="btn-close"
@@ -259,8 +272,8 @@
                                             </div>
                                             @endforeach
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Check Out</button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Proses</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                             </div>
                                             </form>
                                         </div>

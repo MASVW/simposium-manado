@@ -4,7 +4,6 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BucketController;
-use App\Http\Controllers\ChangePass;
 use App\Http\Controllers\EventDashboardController;
 use App\Http\Controllers\ExcelExport;
 use App\Http\Controllers\FormControll;
@@ -13,9 +12,6 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\Navigation;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricesDashboardController;
-use App\Http\Controllers\SignUpController;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,6 +41,15 @@ Route::get('/profile/edit/pass', [Navigation::class, 'editingPass'])->middleware
 Route::post('/profile/edit/pass', [Navigation::class, 'editPass'])->middleware('auth');
 
 Route::get('/about-us', [Navigation::class,'about']);
+
+Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->name('google.callback');
+
+Route::get('/logout', [Navigation::class, 'home']);
+Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
+
+
+//admin
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware('isAdmin');
 
@@ -92,14 +97,6 @@ Route::put('/dashboard/manage-about', [AboutController::class, 'update'])->middl
 
 
 
-Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])->name('google.login');
-Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->name('google.callback');
-
-
-
-
-Route::get('/logout', [Navigation::class, 'home']);
-Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
 
 //Exporting Excel
 

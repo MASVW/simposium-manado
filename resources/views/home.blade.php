@@ -21,7 +21,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <h6>OOPS . . .</h6>
-                                            <h2>Currently, there are no active events.</h2>
+                                            <h2>Saat ini, tidak ada acara yang aktif.</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                         
                                         <div class="col-lg-12">
                                             <div class="border-first-button scroll-to-section">
-                                                <a href="#desc">See More!</a>
+                                                <a href="#desc">Lebih Lanjut!</a>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                         data-wow-delay="0.3s">
                         <div class="section-heading">
                             <h6>{{$events->eventDate}}</h6>
-                            <h4>Details About
+                            <h4>Informasi Lebih Lanjut
                                 <em>{{$events->eventName}}</em>
                             </h4>
                             <div class="line-dec"></div>
@@ -185,11 +185,11 @@
                                                                     <input type="hidden" value="{{$event->id}}" name="prices_id">
                                                                     <input type="hidden" value="{{auth()->user()->id}}" name="users_id">
                                                                     <input type="hidden" value="{{$event->position_id}}" name="job_id">
-                                                                    <button type="submit" class="btn btn-primary">ADD TO CHART</button>
+                                                                    <button type="submit" class="btn btn-primary">Tambah ke keranjang</button>
                                                                 </div>
                                                             </form>
                                                             @else
-                                                            <button type="submit" class="btn btn-primary" id="chart" disabled>ADD TO CHART</button>
+                                                            <button type="submit" class="btn btn-primary" id="chart" disabled>Tambah ke keranjang</button>
                                                             @endauth
                                                         </div>
                                                     </div>
