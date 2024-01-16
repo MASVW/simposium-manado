@@ -8,39 +8,31 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Simposium Manado">
 
-        <meta name="author" content="">
-        <script type="text/javascript"
-      src="https://app.sandbox.midtrans.com/snap/snap.js"
-      data-client-key="{{config('midtrans.client_key')}}"></script>
+        <meta name="author" content="Samuel Zakaria">
+        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"data-client-key="{{config('midtrans.client_key')}}"></script>
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin="crossorigin">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
         <title>Simposium Manado</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="/assets/css/fontawesome.css">
         <link rel="stylesheet" href="/assets/css/templatemo-digimedia-v3.css">
         <link rel="stylesheet" href="/assets/css/animated.css">
         <link rel="stylesheet" href="/assets/css/owl.css">
-        <!-- TemplateMo 568 DigiMedia https://templatemo.com/tm-568-digimedia -->
+
+
+        <!-- Custom Style -->
         <style>
             .custom-button {
                 width: 100%;
@@ -70,95 +62,78 @@
             </div>
         </div>
 
-        <header
-            class="header-area header-sticky wow slideInDown"
-            data-wow-duration="0.75s"
-            data-wow-delay="0s">
+
+        <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <nav class="main-nav">
                             <!-- ***** Logo Start ***** -->
-                            <a href="/" class="logo">
+                            <a href="#top" class="logo">
                                 <h3 class="mt-4 pt-2">Simposium Manado</h3>
-                                <!-- kalau ada image -->
-                                <!-- <img src="assets/images/logo-v3.png" alt=""> -->
                             </a>
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
                                 @foreach ($event as $event)
                                 <li class="scroll-to-section">
-                                    <a
-                                        href="/tag={{$event->slug}}"
-                                        class="{{($id == $event->id && $title === 'Home') ? 'active' : ''}}">{{$event->eventName}}</a>
+                                    <a href="/tag={{$event->slug}}" class="{{($id == $event->id && $title === 'Home') ? 'active' : ''}}">{{$event->eventName}}</a>
                                 </li>
                                 @endforeach
-                                <li class="scroll-to-section">
-                                    <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a>
-                                </li>
-
-
+                                <li class="scroll-to-section"> <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a> </li>
                                 @auth
-                                <div class="btn-group">
+                                <!-- <div class="btn-group"> -->
                                     <li class="mt-1">
-                                        <p class="mt-0 pt-0 text-body fw-bolder">Hi!
-                                            {{ auth()->user()->firstName}}</p>
+                                        <p class="mt-0 pt-0 text-body fw-bolder">Hi! {{ auth()->user()->firstName}}</p>
                                     </li>
-                                    <button
-                                        type="button"
-                                        class="btn btn-primary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        data-bs-display="static"
-                                        aria-expanded="false"></button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></button>
                                     <ul class="dropdown-menu">
-
-                                    <li>
-                                        <a href="/profile" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-person-fill me-2"></i></i>Profile</button></a>
-                                    </li>
-                                    <li>
-                                        <button  class="dropdown-item m-0 ps-3" type="button"data-bs-toggle="modal" data-bs-target="#bucket">
+                                        <li>
+                                            <a href="/profile" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-person-fill me-2"></i></i>Profile</button></a>
+                                        </li>
+                                        <li>
+                                            <button  class="dropdown-item m-0 ps-3" type="button"data-bs-toggle="modal" data-bs-target="#bucket">
                                             <i class="bi bi-basket me-2"></i>Cart</button>
-                                    </li>
-                                    <li>
-                                        <a href="/history" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-clock-history me-2"></i></i>History</button></a>
-                                    </li>
-                                    <li>
-                                        <a href="/profile/edit/pass" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-shield-lock-fill me-2"></i></i>Change Password</button></a>
-                                    </li>
-                                    @can('admin')
-                                    <li>
-                                        <a href="/dashboard" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button">
-                                        <i class="bi bi-speedometer2 me-2"></i></i>Dashboard</button>
-                                        </a>
-                                    </li>
+                                        </li>
+                                        <li>
+                                            <a href="/history" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-clock-history me-2"></i></i>History</button></a>
+                                        </li>
+                                        <li>
+                                            <a href="/profile/edit/pass" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-shield-lock-fill me-2"></i></i>Change Password</button></a>
+                                        </li>
+                                        @can('admin')
+                                        <li>
+                                            <a href="/dashboard" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button">
+                                                <i class="bi bi-speedometer2 me-2"></i></i>Dashboard</button>
+                                            </a>
+                                        </li>
                                     @endcan
-
-                                    <li><hr class="dropdown-divider"></li>
-                                    <form action="/logout" method="post">
+                                        <li><hr class="dropdown-divider"></li>
+                                        <form action="/logout" method="post">
                                         @csrf
                                         <li>
                                             <button class="dropdown-item" type="submit">
                                                 <i class="bi bi-box-arrow-right me-2"></i>Log Out</button>
                                         </li>
                                         <li></li>
-                                    </form>
-                                </ul>
-                            </div>
-
-                            @else
-                            <li class="scroll-to-section">
-                                <a href="{{ route('login') }}" class="{{ ($title === 'Login') ? 'active' : ''}}">Masuk</a>
-                            </li>
-                            <li class="scroll-to-section">
-                                    <div class="border-first-button">
-                                        <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Daftar Sekarang!</a>
-                                    </div>
-                            </li>
-                            @endauth
-
-                        </ul>
+                                        </form>
+                                    </ul>
+                                @else
+                                    <li class="scroll-to-section">
+                                        <a href="{{ route('login') }}" class="{{ ($title === 'Login') ? 'active' : ''}}">Masuk</a>
+                                    </li>
+                                    <li class="scroll-to-section">
+                                        <div class="border-first-button">
+                                            <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Daftar Sekarang!</a>
+                                        </div>
+                                    </li>
+                                @endauth
+                            </ul>
+                            <a class='menu-trigger'>
+                <span>Menu</span>
+            </a>
                         <!-- ***** Menu End ***** -->
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -301,42 +276,35 @@
         @endauth
         <!-- Scripts -->
         <script src="/vendor/jquery/jquery.min.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/js/owl-carousel.js"></script>
-        <script src="/assets/js/animation.js"></script>
-        <script src="/assets/js/imagesloaded.js"></script>
-        <script src="/assets/js/custom.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var maxLength = 500;
-                var excerptElement = document.getElementById("excerptText");
-                var excerptHTML = excerptElement.innerHTML;
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/animation.js"></script>
+<script src="/assets/js/imagesloaded.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Pengecekan elemen excerptText
+        var excerptElement = document.getElementById("excerptText");
+        if (excerptElement) {
+            var maxLength = 500;
+            var excerptHTML = excerptElement.innerHTML;
 
-                if (excerptHTML.length > maxLength) {
-                    // Menemukan batas panjang untuk teks tanpa menghancurkan elemen HTML
-                    var limitedHTML = excerptHTML.substring(0, maxLength);
+            if (excerptHTML.length > maxLength) {
+                var limitedHTML = excerptHTML.substring(0, maxLength);
+                var lastHTMLIndex = limitedHTML.lastIndexOf('<');
+                var limitedText = excerptHTML.substring(0, lastHTMLIndex);
+                excerptElement.innerHTML = limitedText + " ...";
+            }
+        }
 
-                    // Mencari tempat terakhir elemen HTML
-                    var lastHTMLIndex = limitedHTML.lastIndexOf('<');
-
-                    // Mengambil potongan teks sejauh batas panjang tanpa memotong elemen HTML
-                    var limitedText = excerptHTML.substring(0, lastHTMLIndex);
-
-                    // Menetapkan teks yang telah dipotong dan ditambahkan "..."
-                    excerptElement.innerHTML = limitedText + " ...";
-                }
-            });
-            // Mengambil elemen HTML yang menampilkan nilai
-            var valueElement = document.getElementById('harga');
-
-            // Mendapatkan nilai asli
+        // Pengecekan elemen harga
+        var valueElement = document.getElementById('harga');
+        if (valueElement) {
             var originalValue = parseFloat(valueElement.innerHTML);
-
-            // Mengubah nilai ke dalam format yang diinginkan (dalam contoh ini, format dengan titik sebagai pemisah ribuan)
             var formattedValue = originalValue.toLocaleString('id-ID', { minimumFractionDigits: 2 });
-
-            // Menetapkan nilai yang telah diformat ke dalam elemen HTML
             valueElement.innerHTML = formattedValue;
-        </script>
+        }
+    });
+</script>
     </body>
 </html>

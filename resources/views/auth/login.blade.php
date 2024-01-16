@@ -1,17 +1,10 @@
-<?php 
-    $id=1;
-    $title="Login"
-?>
+<?php $id=1; $title="Login"?>
 @extends('layouts.main') @section('login')
 <div id="contact" class="contact-us section">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 ">
-                <div
-                    class="section-heading wow fadeIn"
-                    data-wow-duration="1s"
-                    data-wow-delay="0.5s">
-
+                <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                     @if(session()->has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
@@ -34,10 +27,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-            <div
-                class="col-lg-8 wow fadeInUp"
-                data-wow-duration="0.5s"
-                data-wow-delay="0.25s">
+            <div class="col-lg-8 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
                 
                 <form id="contact" method="POST" action="{{ route('login') }}">
                     @csrf
