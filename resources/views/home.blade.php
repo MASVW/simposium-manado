@@ -66,7 +66,7 @@
                                             <span>{!! $teks !!}</span>
                                         </div>
                                         
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 my-4">
                                             <div class="border-first-button scroll-to-section">
                                                 <a href="#desc">Lebih Lanjut!</a>
                                             </div>
@@ -140,7 +140,7 @@
                             <div class="thumbs">
                                 <div class="col-lg-12">
                                     <div class="post-item">
-                                        <p class="text-center text-primary fs-2 fw-bold text-uppercase my-3">Price list</p>
+                                        <h4 class="text-center fs-2 fw-bold text-uppercase my-3">Daftar Harga</h4>
                                         
                                         <form action="/tag={{$events->slug}}/price" method="POST" style="align-items: center;">
                                             @CSRF

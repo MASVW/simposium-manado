@@ -20,7 +20,7 @@
                             <div class="col-lg-12">
                                 <div class="fill-form">
                                     <div class="row">
-                                        <h3 class="text-center my-4 text-primary">Daftar Simposium Manado</h3>
+                                        <h3 class="text-center my-4">Daftar Simposium Manado</h3>
                                         
                                         <div class="d-flex justify-content-center">
                                             <div class="col-lg-6">

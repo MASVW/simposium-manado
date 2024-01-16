@@ -29,28 +29,11 @@
         <link rel="stylesheet" href="/assets/css/fontawesome.css">
         <link rel="stylesheet" href="/assets/css/templatemo-digimedia-v3.css">
         <link rel="stylesheet" href="/assets/css/animated.css">
-        <link rel="stylesheet" href="/assets/css/owl.css">
-
-
-        <!-- Custom Style -->
-        <style>
-            .custom-button {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-
-            .custom-button a {
-                width: 100%;
-            }
-        </style>
-        
+        <link rel="stylesheet" href="/assets/css/owl.css">        
     </head>
 
     <body>
-        <!-- ***** Preloader Start ***** -->
+        <!-- ***** Preloader Start *****
         <div id="js-preloader" class="js-preloader">
             <div class="preloader-inner">
                 <span class="dot"></span>
@@ -60,7 +43,7 @@
                     <span></span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
         <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">

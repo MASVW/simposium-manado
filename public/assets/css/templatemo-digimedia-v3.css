@@ -42,6 +42,17 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: 0;
   outline: 0;
 }
+.custom-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.custom-button a {
+  width: 100%;
+}
 
 /* clear fix */
 .grid:after {
@@ -117,6 +128,7 @@ a {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0px;
   margin-bottom: 0px;
+  color:  #4da6e7;;
 }
 
 ul {
