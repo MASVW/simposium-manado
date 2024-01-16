@@ -33,7 +33,7 @@
     </head>
 
     <body>
-        <!-- ***** Preloader Start *****
+        <!-- ***** Preloader Start ***** -->
         <div id="js-preloader" class="js-preloader">
             <div class="preloader-inner">
                 <span class="dot"></span>
@@ -43,7 +43,7 @@
                     <span></span>
                 </div>
             </div>
-        </div> -->
+        </div>
 
 
         <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
@@ -52,8 +52,8 @@
                     <div class="col-12">
                         <nav class="main-nav">
                             <!-- ***** Logo Start ***** -->
-                            <a href="#top" class="logo">
-                                <h3 class="mt-4 pt-2">Simposium Manado</h3>
+                            <a href="/" class="logo">
+                                <h5 class="mt-4 pt-2">Simposium Manado</h5>
                             </a>
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
@@ -146,18 +146,15 @@
         </footer>
         @auth
 
-        <div class="fixed-bottom m-3" style="position: fixed; left: 92%; bottom:20px">
-            <button
-                class="btn btn-primary "
-                type="button"
-                style="border-radius: 100%; padding-left: 13px; padding-right: 13px"
-                data-bs-toggle="modal"
-                data-bs-target="#bucket">
-                <h3 class="my-1">
-                    <i class="bi bi-basket"></i>
-                </h3>
-            </button>
-        </div>
+        <div class="floating-button">
+    <button class="btn btn-primary" type="button" style="border-radius: 100%; padding-left: 13px; padding-right: 13px"
+        data-bs-toggle="modal"
+        data-bs-target="#bucket">
+        <h3 class="my-1">
+            <i class="bi bi-basket" style="color: white;"></i>
+        </h3>
+    </button>
+</div>
 
         <div
             class="modal fade"
@@ -183,7 +180,7 @@
                         </div>
                         @endif
                         <div class="col-lg-12">
-                            <p>Select Items</p>
+                            <p>Pilih Item</p>
                             <?php 
                                 $data = Bucket::with(['events', 'users', 'prices'])
                                 ->where('users_id', auth()->user()->id)
