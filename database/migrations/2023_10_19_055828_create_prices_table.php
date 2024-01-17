@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->nullable(false)->default(0);
             $table->mediumText('priceDesc')->nullable(true);
             $table->foreignId('events_id')->nullable(true)->references('id')->on('events')->onDelete('cascade');
-            $table->foreignId('position_id')->nullable(true)->references('id')->on('positions');
+            $table->foreignId('positions_id')->nullable(true)->references('id')->on('positions');
             $table->timestamps();
         });
     }

@@ -42,6 +42,10 @@ figure, header, nav, section, article, aside, footer, figcaption {
   border: 0;
   outline: 0;
 }
+.table-responsive {
+  overflow-x: auto;
+}
+
 .custom-button {
   width: 100%;
   display: flex;
@@ -2350,6 +2354,13 @@ responsive
 */
 
 @media (max-width: 1200px) {
+  .col-lg-12 {
+    width: 100%;
+  }
+
+  .table {
+    width: 100%;
+  }
   .header-area .main-nav .nav {
     visibility: hidden;
   }
@@ -2379,6 +2390,13 @@ responsive
 }
 
 @media (max-width: 992px) {
+  .col-lg-12 {
+    width: 100%;
+  }
+
+  .table {
+    width: 100%;
+  }
   .header-area .main-nav .nav {
     visibility: hidden;
   }
@@ -2457,6 +2475,26 @@ responsive
 }
 
 @media (max-width: 767px) {
+  .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+  .table-responsive > .table {
+    margin-bottom: 0;
+  }
+
+  .table-responsive > .table > thead > tr > th,
+  .table-responsive > .table > tbody > tr > th,
+  .table-responsive > .table > tfoot > tr > th,
+  .table-responsive > .table > thead > tr > td,
+  .table-responsive > .table > tbody > tr > td,
+  .table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+
   .header-area .main-nav .nav {
     visibility: visible;
   }

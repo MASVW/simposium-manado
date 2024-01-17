@@ -32,7 +32,7 @@ class Navigation extends Controller
                 "jobs" => Position::all(),
                 "job" => Position::where('id', $jobId)->first(),
                 "events" => $event,
-                "price" => Prices::where('events_id', $event['id'])->where('position_id', $jobId)->with('events')->get()
+                "price" => Prices::where('events_id', $event['id'])->where('positions_id', $jobId)->with('events')->get()
                 
             ]);
         }
@@ -47,7 +47,7 @@ class Navigation extends Controller
         "jobs" => Position::all(),
         "job" => Position::where('id', $jobId)->first(),
         "events" => Events::where('id', $event->id)->with('prices')->first(),
-        "price" => Prices::where('events_id', $event->id)->where('position_id', $jobId)->with('events')->get()
+        "price" => Prices::where('events_id', $event->id)->where('positions_id', $jobId)->with('events')->get()
     ]);
     }
     public function withId(Events $event)
@@ -61,7 +61,7 @@ class Navigation extends Controller
         "jobs" => Position::all(),
         "job" => Position::where('id', $jobId)->first(),
         "events" => Events::where('id', $event->id)->with('prices')->first(),
-        "price" => Prices::where('events_id', $event->id)->where('position_id', $jobId)->with('events')->get()
+        "price" => Prices::where('events_id', $event->id)->where('positions_id', $jobId)->with('events')->get()
     ]);
     }
 

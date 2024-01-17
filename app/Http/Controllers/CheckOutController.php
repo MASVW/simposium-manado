@@ -40,7 +40,7 @@ class CheckOutController extends Controller
                     $item = Datas::create([
                         "users_id"=> $saved->users_id,
                         "buckets_id"=> $saved->id,
-                        "positions_id" => $saved->prices->position_id,
+                        "positions_id" => $saved->prices->positions_id,
                         "payments_id" => $saved->payments_id,
                         "isFilled" => 0,
                         "events_id" => $saved->events->id,

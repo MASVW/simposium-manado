@@ -21,7 +21,7 @@ class PricesFactory extends Factory
                 'priceDesc' => $this->faker->sentence(8),
                 'price' => $this->faker->randomNumber(5, true),
                 'events_id'=> mt_rand(1,2),
-                'position_id'=> mt_rand(1,7),
+                'positions_id'=> mt_rand(1,7),
         ];
     }
 }

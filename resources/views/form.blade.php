@@ -100,7 +100,7 @@
                                         <input type="hidden" name="jobs?{{$bucket->id}}" value="{{$bucket->prices->job_id}}">
                                         <fieldset class="mt-4">
                                             <p class="text-start text-dark">Job</p>
-                                            <?php $job = Position::where("id", $bucket->prices->position_id)->first()?>
+                                            <?php $job = Position::where("id", $bucket->prices->positions_id)->first()?>
                                             <select class="form-select form-select-sm mb-3" name="job_id" disabled>
                                                 <option selected>Job: {{$job->desc}}</option>
                                             </select>

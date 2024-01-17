@@ -21,7 +21,7 @@ class BucketController extends Controller
         "jobs" => Position::all(),
         "job" => Position::where('id', $jobId)->first(),
         "events" => Prices::where('events_id', $event->id)->with('events')->first(),
-        "price" => Prices::where('events_id', $event->id)->where('position_id', $jobId)->with('events')->get()
+        "price" => Prices::where('events_id', $event->id)->where('positions_id', $jobId)->with('events')->get()
     ]);
     }
 
