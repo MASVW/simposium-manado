@@ -23,6 +23,7 @@ class PaymentController extends Controller
             'id'=> '1',
         ]);
     }
+
     // public function create(){
     //     $total = Bucket::whereIn('buckets.id', (array) Session::get('data'))
     //         ->join('prices', 'buckets.priceS_id', '=', 'prices.id')
@@ -88,8 +89,13 @@ class PaymentController extends Controller
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if ($hashed == $request->signature_key) {
             if ($request->transaction_status == "capture" || $request->transaction_status == "settlement") {
+                $email = new MailController();
                 $order = Payment::find($request->order_id);
+                $firstName = $order->users->firstName;
+                $lastName = $order->users->lastName;
+                $userEmail = $order->users->email;
                 $order->update(['status' => 'Paid']);
+                $email->successPayment($firstName, $lastName, $order->id, $userEmail);
             };
         };
     }

@@ -200,11 +200,11 @@
 
                                             <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:22px;text-align:left;color:#525252;">
                                                 <p>
-                                                    Kepada {{NAMA}}, 
+                                                    Kepada {{$firstName}} {{$lastName}}, 
                                                     <br>
                                                     <br>
 
-                                                    Kami ingin menyampaikan ucapan terima kasih sebesar-besarnya atas partisipasi Anda dalam kegiatan {{Nama Kegiatan}}. Kami senang dapat memiliki Anda sebagai bagian dari acara kami.
+                                                    Kami ingin menyampaikan ucapan terima kasih sebesar-besarnya atas partisipasi Anda dalam kegiatan {{$eventName->events->eventName}}. Kami senang dapat memiliki Anda sebagai bagian dari acara kami.
 
                                                     <br>
                                                     <br>
@@ -228,26 +228,18 @@
                                                     <th style="padding: 0 15px;">Participant</th>
                                                     <th style="padding: 0 0 0 15px;" align="right">Price</th>
                                                 </tr>
+                                                @foreach($requestData as $data)
                                                 <tr>
-                                                    <td style="padding: 5px 15px 5px 0;">{{Event Name}}</td>
-                                                    <td style="padding: 0 15px;">{{Nama Lengkap}}</td>
-                                                    <td style="padding: 0 0 0 15px;" align="right">{{Harga}}</td>
+                                                    <td style="padding: 5px 15px 5px 0;">{{$data->events->eventName}}</td>
+                                                    <td style="padding: 0 15px;">{{$data->fullName}}</td>
+                                                    <td style="padding: 0 0 0 15px;" align="right">{{$data->buckets->prices->price}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td style="padding: 5px 15px 5px 0;">{{Event Name}}</td>
-                                                    <td style="padding: 0 15px;">{{Nama Lengkap}}</td>
-                                                    <td style="padding: 0 0 0 15px;" align="right">{{Harga}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 5px 15px 5px 0;">{{Event Name}}</td>
-                                                    <td style="padding: 0 15px;">{{Nama Lengkap}}</td>
-                                                    <td style="padding: 0 0 0 15px;" align="right">{{Harga}}</td>
-                                                </tr>
+                                                @endforeach
                                                 
                                                 <tr style="border-bottom:2px solid #ecedee;text-align:left;padding:15px 0;">
                                                     <td style="padding: 5px 15px 5px 0; font-weight:bold">Total</td>
                                                     <td style="padding: 0 15px;"></td>
-                                                    <td style="padding: 0 0 0 15px; font-weight:bold" align="right">{{Harga}}</td>
+                                                    <td style="padding: 0 0 0 15px; font-weight:bold" align="right">{{$eventName->payments->total}}</td>
                                                 </tr>
                                             </table>
 
