@@ -1,8 +1,6 @@
 <?php 
   use App\Models\Events;
-  use App\Models\Bucket;
-  $event = Events::where('status', 1)->get();
-?>
+  use App\Models\Bucket;?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,18 +55,19 @@
                             </a>
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
-                            <ul class="nav">
+                            <ul class="nav-sec">
+                                <?php $event = Events::where('status', 1)->get();?>
                                 @foreach ($event as $event)
-                                <li class="scroll-to-section">
+                                <li>
                                     <a href="/tag={{$event->slug}}" class="{{($id == $event->id && $title === 'Home') ? 'active' : ''}}">{{$event->eventName}}</a>
                                 </li>
                                 @endforeach
-                                <li class="scroll-to-section"> <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a> </li>
+                                <li> <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a> </li>
                                 @auth
-                                <!-- <div class="btn-group"> -->
-                                    <li class="mt-1">
-                                        <p class="mt-0 pt-0 text-body fw-bolder">Hi! {{ auth()->user()->firstName}}</p>
-                                    </li>
+                                <div class="btn-group">
+                                <li>
+                                    <a>Hi! {{ auth()->user()->firstName}}</a>
+                                </li>
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></button>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -101,23 +100,84 @@
                                         <li></li>
                                         </form>
                                     </ul>
+                                </div>
                                 @else
-                                    <li class="scroll-to-section">
+                                    <li>
                                         <a href="{{ route('login') }}" class="{{ ($title === 'Login') ? 'active' : ''}}">Masuk</a>
                                     </li>
-                                    <li class="scroll-to-section">
+                                    <li>
                                         <div class="border-first-button">
                                             <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Daftar Sekarang!</a>
                                         </div>
                                     </li>
                                 @endauth
                             </ul>
+                            <ul class="nav">
+                            <?php $event = Events::where('status', 1)->get();?>
+                                @auth
+                                @foreach ($event as $event)
+                                <li>
+                                    <a href="/tag={{$event->slug}}" class="{{($id == $event->id && $title === 'Home') ? 'active' : ''}}">{{$event->eventName}}</a>
+                                </li>
+                                @endforeach
+                                <li> <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a> </li>                               
+                                <li>
+                                    <a href="/profile" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-person-fill me-2"></i></i>Profile</button></a>
+                                </li>
+                                <li>
+                                    <a  class="dropdown-item m-0 ps-3" data-bs-toggle="modal" data-bs-target="#bucket">
+                                    <i class="bi bi-basket me-2"></i>Cart</a>
+                                </li>
+                                <li>
+                                    <a href="/history" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-clock-history me-2"></i></i>History</button></a>
+                                </li>
+                                <li>
+                                    <a href="/profile/edit/pass" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button"><i class="bi bi-shield-lock-fill me-2"></i></i>Change Password</button></a>
+                                </li>
+                                @can('admin')
+                                <li>
+                                    <a href="/dashboard" class="m-0 p-0"><button class="dropdown-item m-0 ps-3 py-0" type="button">
+                                        <i class="bi bi-speedometer2 me-2"></i></i>Dashboard</button>
+                                    </a>
+                                </li>
+                                @endcan
+                                
+                                <li>
+                                    <a>
+                                        <form action="/logout" method="post">
+                                        @csrf
+                                            <button class="dropdown-item" type="submit">
+                                                <i class="bi bi-box-arrow-right me-2"></i>Log Out
+                                            </button>
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+
+                                </li>
+                                @else
+                                @foreach ($event as $event)
+                                <li>
+                                    <a href="/tag={{$event->slug}}" class="{{($id == $event->id && $title === 'Home') ? 'active' : ''}}">{{$event->eventName}}</a>
+                                </li>
+                                @endforeach
+                                <li> <a href="/about-us" class="{{ ($title === 'AboutUs') ? 'active' : ''}}">Tentang Kami</a> </li>
+                                <li>
+                                    <a href="{{ route('login') }}" class="{{ ($title === 'Login') ? 'active' : ''}}">Masuk</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('register')}}" class="{{ ($title === 'SignUp') ? 'active' : ''}}">Daftar Sekarang!</a>
+                                </li>
+                                <li>
+                                    
+                                </li>
+                                @endauth
+                            </ul>
                             <a class='menu-trigger'>
-                <span>Menu</span>
-            </a>
+                                <span>Menu</span>
+                            </a>
                         <!-- ***** Menu End ***** -->
                         </nav>
-                    </div>
                 </div>
             </div>
         </header>

@@ -1,7 +1,7 @@
 
 
 @extends('layouts.main')
-    @section('main')\
+    @section('main')
         @if($id === null)
 
         <div
