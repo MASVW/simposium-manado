@@ -68,6 +68,7 @@ Route::get('/{payments:id}/viewForm', [FormControll::class, 'index'])->name('vie
 
 Route::get('/{payments:id}/fillForm', [FormControll::class, 'index'])->name('form')->middleware('auth');
 Route::post('/{payments:id}/fillForm', [FormControll::class, 'store'])->middleware('auth');
+Route::put('/{payments:id}/fillForm', [FormControll::class, 'update'])->middleware('auth');
 
 Route::post('/addtoBucket/tag={event:slug}', [BucketController::class, 'create'])->middleware('auth');
 Route::post('/bucket/delete', [BucketController::class, 'delete'])->middleware('auth');

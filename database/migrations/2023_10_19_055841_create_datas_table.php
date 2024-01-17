@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('isFilled')->default(false);;
             $table->string('fullName')->nullable(true);
             $table->string('phone')->nullable(true);
+            $table->string('instance')->nullable(true);
             $table->string('email')->nullable(true);
             $table->boolean('attendance')->default(false);
             $table->timestamps();

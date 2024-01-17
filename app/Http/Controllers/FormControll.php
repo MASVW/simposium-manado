@@ -11,12 +11,18 @@ use Illuminate\Http\Request;
 class FormControll extends Controller
 {
     public function index(Payment $payments){
-        return view('form',[
-            'title' => 'Form',
-            'payment' => $payments->id,
-            'bucket' => Bucket::where("payments_id", $payments->id)->with('prices', 'payments', 'events')->get(),
-            'id' => 0,
-        ]);
+      $buckets = Bucket::where("payments_id", $payments->id)->with('prices', 'payments', 'events', 'datas')->get();
+
+      // $dataNames = null;
+      $dataNames = $buckets->pluck('datas.fullName')->toArray();
+
+      return view('form', [
+          'title' => 'Form',
+          'payment' => $payments->id,
+          'bucket' => $buckets,
+          'data' => $dataNames,
+          'id' => 0,
+      ]);
     }
     public function store(Request $request, Payment $payments){
         
@@ -39,7 +45,8 @@ class FormControll extends Controller
                 "isFilled" => 1,              
                 "fullName" => $data[$saved->buckets_id][0],
                 "phone" => $data[$saved->buckets_id][1],
-                "email" => $data[$saved->buckets_id][2]
+                "instance" => $data[$saved->buckets_id][2],
+                "email" => $data[$saved->buckets_id][3]
             ]);
           };
         }
@@ -49,7 +56,8 @@ class FormControll extends Controller
             "isFilled" => 1,              
             "fullName" => $data[$saved->buckets_id][0],
             "phone" => $data[$saved->buckets_id][1],
-            "email" => $data[$saved->buckets_id][2]
+            "instance" => $data[$saved->buckets_id][2],
+            "email" => $data[$saved->buckets_id][3]
           ]);
         }
 
@@ -81,5 +89,53 @@ class FormControll extends Controller
                     'title' => "Check Out",
                     'id' => 1,
                 ], compact('snapToken','payments'));
+      }
+      public function update(Request $request, Payment $payments){
+        $buckets = Bucket::where("payments_id", $payments->id)->with('prices', 'payments', 'events', 'datas')->get();
+
+      // $dataNames = null;
+        $dataNames = $buckets->pluck('datas.fullName')->toArray();
+
+        $variabel = $request->except('_token');
+        
+        $data = [];
+
+        foreach ($variabel as $key => $value) {
+          $parts = explode ('?', $key);
+          if (count($parts) > 1) {
+            $data[$parts[1]][]= $value;
+          }
+        }
+
+        $i = count($data);
+          if ($i > 1) {
+            $saved = Datas::where("payments_id", $payments->id)->get();
+            foreach ($saved as $saved) {
+              Datas::where("buckets_id", $saved->buckets_id)->update([  
+                  "isFilled" => 1,              
+                  "fullName" => $data[$saved->buckets_id][0],
+                  "phone" => $data[$saved->buckets_id][1],
+                  "instance" => $data[$saved->buckets_id][2],
+                  "email" => $data[$saved->buckets_id][3]
+              ]);
+            };
+          }
+          else{
+            $saved = Datas::where("payments_id", $payments->id)->first();
+            Datas::where("buckets_id", $saved->buckets_id)->update([  
+              "isFilled" => 1,              
+              "fullName" => $data[$saved->buckets_id][0],
+              "phone" => $data[$saved->buckets_id][1],
+              "instance" => $data[$saved->buckets_id][2],
+              "email" => $data[$saved->buckets_id][3]
+            ]);
+          }
+          return view('form', [
+            'title' => 'Form',
+            'payment' => $payments->id,
+            'bucket' => $buckets,
+            'data' => $dataNames,
+            'id' => 0,
+        ]);
       }
 }
