@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simposium Manado - Registrasi Akun</title>
+    <title>Simposium Manado - Pemberitahuan Perubahan Sandi</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -32,7 +32,7 @@
             height: auto;
         }
 
-        .registration-message {
+        .notification-message {
             text-align: center;
             font-size: 24px;
             font-weight: bold;
@@ -40,14 +40,14 @@
             margin-bottom: 20px;
         }
 
-        .registration-details {
+        .notification-details {
             font-size: 14px;
             line-height: 22px;
             color: #525252;
             margin-bottom: 20px;
         }
 
-        .registration-details p {
+        .notification-details p {
             margin: 13px 0;
         }
 
@@ -64,16 +64,16 @@
 <body>
 
     <div class="container">
-        <div class="registration-message">
-            Registrasi Akun
+        <div class="notification-message">
+            Pemberitahuan Perubahan Sandi
         </div>
 
-        <div class="registration-details">
+        <div class="notification-details">
             <p>
                 Hai {{ $firstName }} {{ $lastName }},
             </p>
             <p>
-               Terima kasih telah mendaftarkan akun di Simposium Manado. Kami sangat senang memiliki Anda sebagai bagian dari komunitas kami.
+                Kami ingin memberitahu Anda bahwa sandi akun Anda di Simposium Manado telah berhasil diubah. Jika Anda merasa tidak melakukan perubahan ini, segera hubungi kami.
             </p>
         </div>
 

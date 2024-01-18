@@ -187,6 +187,7 @@
         @yield('main') @yield('check-out') @yield('aboutUs') @yield('login')
         @yield('signUp') @yield('payment') @yield('invoice') @yield('profile')
         @yield('editProfile') @yield('form') @yield('history')@yield('forgot-password')
+        @yield('reset-password')@yield('reset-password-form')
         
 
         <!-- Button trigger modal -->

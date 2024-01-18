@@ -116,7 +116,7 @@
                                                                 <li>*Mencakup angka</li>
                                                             </ul>
                                                         </div>
-                                                        @error('password')
+                                                        @error('password_confirmation')
                                                         <div class="invalid-feedback">
                                                             {{$message}}
                                                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Http\Controllers\MailController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -21,6 +22,12 @@ class ResetUserPassword implements ResetsUserPasswords
         Validator::make($input, [
             'password' => $this->passwordRules(),
         ])->validate();
+
+        $mail = new MailController;
+        $firstName = $user->firstName;
+        $lastName = $user->lastName;
+        $email = $user->email;
+        $mail->changePassword($firstName, $lastName, $email);
 
         $user->forceFill([
             'password' => Hash::make($input['password']),

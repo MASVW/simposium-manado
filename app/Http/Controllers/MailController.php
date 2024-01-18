@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ChangePasswordMail;
 use App\Mail\PaymentMail;
 use App\Mail\RegisteredMail;
 use Illuminate\Http\Request;
@@ -16,5 +17,9 @@ class MailController extends Controller
     public function successPayment($firstName, $lastName, $paymentId, $email){
         Mail::to($email)
             ->send(new PaymentMail($firstName, $lastName, $paymentId));
+    }
+    public function changePassword($firstName, $lastName, $email){
+        Mail::to($email)
+            ->send(new ChangePasswordMail($firstName, $lastName));
     }
 }
