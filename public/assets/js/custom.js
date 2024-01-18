@@ -40,7 +40,7 @@
 	// Menu Dropdown Toggle
   if($('.menu-trigger').length){
     $(".menu-trigger").on('click', function() { 
-      $('.header-area .nav').slideToggle(150);
+      $('.header-area .nav').piToggle(150);
     });
   }
 

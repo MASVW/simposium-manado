@@ -242,9 +242,9 @@
                                                         <div class="col-lg-12">
                                                             <div>
                                                                 <p>Position: </p>
-                                                                <select class="form-select form-select-lg mb-3" name='position_id'>                                                        
-                                                                    <?php $position = Position::where('id', $priceItem->position_id)->value('desc'); ?>
-                                                                    <option value="{{ $priceItem->position_id }}" selected>{{$position}}</option>
+                                                                <select class="form-select form-select-lg mb-3" name='positions_id'>                                                        
+                                                                    <?php $position = Position::where('id', $priceItem->positions_id)->value('desc'); ?>
+                                                                    <option value="{{ $priceItem->positions_id }}" selected>{{$position}}</option>
                                                                     @foreach($jobs as $job)
                                                                         <option value="{{ $job->id }}">{{ $job->desc }}</option>
                                                                     @endforeach

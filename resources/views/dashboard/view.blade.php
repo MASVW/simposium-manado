@@ -270,6 +270,14 @@
                         
                         <div class="card-header py-3">
                             <a href="/dashboard/manage-event/tag={{$event->slug}}"><h6 class="m-0 font-weight-bold text-primary">{{ $event->eventName }}</h6></a>
+                            <div>
+                                <form action="export-excel/participant" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$event->id}}">
+                                    <input type="hidden" name="eventName" value="{{$event->eventName}}">
+                                    <button class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm my-1" type="submit">Export Participant</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
                             <p class="fs-1 text-primary fw-bold">Excerpt:</p>

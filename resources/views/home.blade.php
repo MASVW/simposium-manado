@@ -111,7 +111,11 @@
                     <div class="col-lg-7 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                         <div class="blog-post">
                             <div class="thumb">
-                                <img src="../assets/images/logo/Simposium.png">
+                                    @if($events->img)
+                                    <img src="{{ asset('./storage/events-images/' . $events->img)}}" alt="Simposi">
+                                    @else
+                                    <img src="../assets/images/logo/Simposium.png" alt="Simposi">
+                                    @endif
                             </div>
                             <div class="down-content">
                                 <span class="category">{{$events->slug}}</span>

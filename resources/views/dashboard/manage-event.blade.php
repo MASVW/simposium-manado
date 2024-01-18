@@ -27,7 +27,9 @@
                     </div>
                     <div class="card-body">
                             <div class="col-lg-12">
+                               <div class="d-flex justify-content-center">
                                 <img src="{{ asset('/storage/events-images/' . $event->img)}}" alt="" height="350px" width="auto">
+                               </div>
                             </div>
                             <h6 class="mt-3 mb-2 font-weight-bold text-pmrimary">{{ $event->eventDate }}</h6>
                             <p class="fs-1 text-primary fw-bold">Excerpt:</p>

@@ -217,22 +217,13 @@
     </button>
 </div>
 
-        <div
-            class="modal fade"
-            id="bucket"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="bucket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Keranjangmu</h1>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     @if(session()->has('error'))
@@ -317,35 +308,35 @@
         @endauth
         <!-- Scripts -->
         <script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/js/owl-carousel.js"></script>
-<script src="/assets/js/animation.js"></script>
-<script src="/assets/js/imagesloaded.js"></script>
-<script src="/assets/js/custom.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Pengecekan elemen excerptText
-        var excerptElement = document.getElementById("excerptText");
-        if (excerptElement) {
-            var maxLength = 500;
-            var excerptHTML = excerptElement.innerHTML;
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/owl-carousel.js"></script>
+        <script src="/assets/js/animation.js"></script>
+        <script src="/assets/js/imagesloaded.js"></script>
+        <script src="/assets/js/custom.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Pengecekan elemen excerptText
+                var excerptElement = document.getElementById("excerptText");
+                if (excerptElement) {
+                    var maxLength = 500;
+                    var excerptHTML = excerptElement.innerHTML;
 
-            if (excerptHTML.length > maxLength) {
-                var limitedHTML = excerptHTML.substring(0, maxLength);
-                var lastHTMLIndex = limitedHTML.lastIndexOf('<');
-                var limitedText = excerptHTML.substring(0, lastHTMLIndex);
-                excerptElement.innerHTML = limitedText + " ...";
-            }
-        }
+                    if (excerptHTML.length > maxLength) {
+                        var limitedHTML = excerptHTML.substring(0, maxLength);
+                        var lastHTMLIndex = limitedHTML.lastIndexOf('<');
+                        var limitedText = excerptHTML.substring(0, lastHTMLIndex);
+                        excerptElement.innerHTML = limitedText + " ...";
+                    }
+                }
 
-        // Pengecekan elemen harga
-        var valueElement = document.getElementById('harga');
-        if (valueElement) {
-            var originalValue = parseFloat(valueElement.innerHTML);
-            var formattedValue = originalValue.toLocaleString('id-ID', { minimumFractionDigits: 2 });
-            valueElement.innerHTML = formattedValue;
-        }
-    });
-</script>
+                // Pengecekan elemen harga
+                var valueElement = document.getElementById('harga');
+                if (valueElement) {
+                    var originalValue = parseFloat(valueElement.innerHTML);
+                    var formattedValue = originalValue.toLocaleString('id-ID', { minimumFractionDigits: 2 });
+                    valueElement.innerHTML = formattedValue;
+                }
+            });
+        </script>
     </body>
 </html>
