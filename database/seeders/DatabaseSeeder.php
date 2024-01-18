@@ -31,6 +31,12 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => 1,
             'password'=> Hash::make('NightFURY28'),
         ]);
+        User::create([
+            "firstName" => 'admin',
+            'email' => 'admin@gmail.com',
+            'isAdmin' => 1,
+            'password'=> Hash::make('admin'),
+        ]);
         Position::create([
             "desc" => 'Student',
         ]);
