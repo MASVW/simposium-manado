@@ -2,8 +2,10 @@
 
 namespace App\Actions\Fortify;
 
+use App\Http\Controllers\MailController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
@@ -19,6 +21,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        $mail = new MailController();
         Validator::make($input, [
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
@@ -27,12 +30,16 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+        $firstName = $input['firstName'];
+        $lastName = $input['lastName'];
+        $email = $input['email'];
+        $mail->register($firstName, $lastName, $email);
 
         return User::create([
-            'firstName' => $input['firstName'],
-            'lastName' => $input['lastName'],
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'birthDate' => $input['birthDate'],
-            'email' => $input['email'],
+            'email' => $email,
             'password' => Hash::make($input['password']),
         ]);
     }
