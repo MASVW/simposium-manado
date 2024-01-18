@@ -9,7 +9,7 @@
         <div class="row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Confirm Items</h2>
+                    <h2>Pembayaran</h2>
                     <hr class="mt-3">
                     <?php 
                         use App\Models\Bucket;

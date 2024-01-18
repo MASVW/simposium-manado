@@ -9,7 +9,7 @@
         <div class="row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Confirm Items</h2>
+                    <h2>Konfirmasi Item</h2>
                     <hr class="mt-3">
                     <?php 
         use App\Models\Bucket;
@@ -75,7 +75,7 @@
                 </a>
               @else
                 <a href="/{{$payment->id}}/fillForm" class="btn btn-primary" role="button">
-                    Fill Form!
+                    Isi Data!
                 </a>
               @endif
               </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Bucket;
 use App\Models\Events;
 use App\Models\Info;
 use App\Models\Position;
@@ -84,10 +85,24 @@ class Navigation extends Controller
     }
     public function history()
     {
+        $items = Bucket::where('users_id', auth()->user()->id)
+        ->with('prices.positions', 'events', 'payments', "datas")
+        ->whereHas('payments', function ($query) {
+            $query->where('status', '=', 'Paid');
+        })
+        ->get();
+    $unSuccess = Bucket::where('users_id', auth()->user()->id)
+        ->with('prices.positions', 'events', 'payments')
+        ->whereHas('payments', function ($query) {
+            $query->where('status', '=', 'Unpaid');
+        })
+        ->get();
         return view('history', 
         [
             'id'=> '1',
             "title" => 'Profile',
+            "item" => $items,
+            "unsuccess" => $unSuccess
         ]);
     }
 

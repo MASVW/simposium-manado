@@ -94,7 +94,10 @@ class PaymentController extends Controller
                 $firstName = $order->users->firstName;
                 $lastName = $order->users->lastName;
                 $userEmail = $order->users->email;
-                $order->update(['status' => 'Paid']);
+                $order->update([
+                    'status' => 'Paid',
+                    'metode' => $request->payment_type,
+                ]);
                 $email->successPayment($firstName, $lastName, $order->id, $userEmail);
             };
         };

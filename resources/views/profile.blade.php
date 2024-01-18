@@ -12,13 +12,12 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
     ->get();
 ?>
 
-<div id="contact" class="contact-us section">
+<div class="contact-us section">
     <div class="container">
         <div class="row">
-            <div class="d-flex justify-content-center">
-                <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
-                
-                    <form id="contact">
+            <div class="d-flex justify-content-center my-5">
+                <div class="col-lg-12 wow fadeInUp my-5" data-wow-duration="0.5s" data-wow-delay="0.25s">
+                    <div id="contact">
                         @csrf
                         <div class="col-lg-12">
                             <div class="fill-form">
@@ -74,7 +73,7 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                                     <table class="table mt-3">
                                         <thead>
                                             <tr>
-                                            <th scope="col">Nomor Payment</th>
+                                            <th scope="col">ID Pembayaran</th>
                                             <th scope="col">Nama Acara</th>
                                             <th scope="col">Tanggal Kegiatan</th>
                                             <th scope="col">Posisi</th>
@@ -105,7 +104,6 @@ $unsuccess = Bucket::where('users_id', auth()->user()->id)
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>                     
             </div>
         </div>

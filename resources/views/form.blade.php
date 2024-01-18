@@ -1,7 +1,7 @@
-<?php use App\Models\Position;?>
+<?php use App\Models\Position;$bio=$data[0];?>
 @extends('layouts.main') @section('form')
 
-@if(!$data)
+@if(!$bio)
 <div id="contact" class="contact-us section">
     <div class="container">
         <div class="row">
