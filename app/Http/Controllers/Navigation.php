@@ -192,6 +192,15 @@ class Navigation extends Controller
             };
         }
     }
+
+    public function feedbackForm(Request $request){
+        $item = $request->except('_token'); 
+        dd($item);
+        
+        //emailing feedback form
+
+        //saving to database
+    }
     
     
 }

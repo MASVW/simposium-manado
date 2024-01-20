@@ -8,7 +8,7 @@ use App\Models\Info;
 class AboutController extends Controller
 {
     public function index(){
-    $information = Info::first();
+    $information = Info::find(1);
         return view('dashboard.about', [
             "title" => 'Information',
             'info' => $information

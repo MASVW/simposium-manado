@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Sarans
+
+Route::post('/feedback', [Navigation::class, 'feedbackForm'])->name('feedBack');
+
 Route::get('/', [Navigation::class, 'home']);
 Route::get('/home', [Navigation::class, 'home'])->name('home');
 Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);

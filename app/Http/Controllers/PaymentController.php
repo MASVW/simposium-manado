@@ -23,67 +23,6 @@ class PaymentController extends Controller
             'id'=> '1',
         ]);
     }
-
-    // public function create(){
-    //     $total = Bucket::whereIn('buckets.id', (array) Session::get('data'))
-    //         ->join('prices', 'buckets.priceS_id', '=', 'prices.id')
-    //         ->sum('prices.price');
-    //     $data = [
-    //         'id'=> rand(234, 989876724244654),
-    //         'users_id'=> auth()->user()->id,
-    //         'total' => $total,
-    //     ];
-    //     $payment = Payment::create($data);
-    //     Bucket::whereIn('id', (array) Session::get('data'))->update([
-    //         'payments_id'=> $payment->id
-    //     ]);
-        
-    //     \Midtrans\Config::$serverKey = config('midtrans.server_key');
-    //     // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-    //     \Midtrans\Config::$isProduction = false;
-    //     // Set sanitization on (default)
-    //     \Midtrans\Config::$isSanitized = true;
-    //     // Set 3DS transaction for credit card to true
-    //     \Midtrans\Config::$is3ds = true;
-
-    //     $params = array(
-    //         'transaction_details' => array(
-    //             'order_id' => $payment->id,
-    //             'gross_amount' => $payment->total,
-    //         ),
-    //         'customer_details' => array(
-    //             'first_name' => auth()->user()->firstName,
-    //             'last_name' => auth()->user()->lastName,
-    //             'email' => auth()->user()->email,
-    //         ),
-    //     );
-
-    //     $snapToken = \Midtrans\Snap::getSnapToken($params);
-    //     setcookie($payment->id, $snapToken, time() + 86400, "/");
-    //     $savedItems = Bucket::where("payments_id", $data['id'])
-    //         ->with('prices', 'events')
-    //         ->get();
-
-    //     foreach ($savedItems as $saved) {
-    //         $data = Datas::create([
-    //             "users_id"=> $saved->users_id,
-    //             "buckets_id"=> $saved->id,
-    //             "positions_id" => $saved->prices->position_id,
-    //             "payments_id" => $saved->payments_id,
-    //             "isFilled" => 0,
-    //             "events_id" => $saved->events->id,
-    //         ]);
-    //         $saved->update(['datas_id' => $data->id]);
-    //     }
-    //     return view("payment", 
-    //     [
-    //         'title' => "Check Out",
-    //         'id' => 1,
-    //     ],
-    //     compact("snapToken","payment"));
-    // }
-
-
     public function callback(Request $request){
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.$serverKey);

@@ -15,7 +15,7 @@
                             <form
                                 action="/dashboard/manage-about"
                                 method="post"
-                                class="user" enctype="multipart/form-data">
+                                class="user">
                                 @method('put')
                                 @csrf
                                 <div class="form-group">
