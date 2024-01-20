@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('users_id')->after('info')->nullable(true)->references('id')->on('users');
             $table->string('message', 2048)->after('users_id')->nullable();
             $table->string('phone')->after('message')->nullable();
+            $table->string('email')->after('phone')->nullable();
+            $table->string('name')->after('phone')->nullable();
         });
     }
 

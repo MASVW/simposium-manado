@@ -194,12 +194,24 @@ class Navigation extends Controller
     }
 
     public function feedbackForm(Request $request){
-        $item = $request->except('_token'); 
-        dd($item);
-        
-        //emailing feedback form
+        $validatedData = $request->validate([
+            'name'=>['string','regex:/[a-z]/','regex:/[A-Z]/'],
+            'subject'=>['string', 'min:3', 'max:255'],
+            'message'=>['string', 'min:10', 'max:255'],
+            
+            'phone'=>['string', 'min:10', 'max:255'],
+            'email' => 'required|email:dns|'
+        ]);
 
-        //saving to database
+        Info::create([
+            'infoName' => $request->infoName,
+            'info' => $validatedData['subject'],
+            'message' => $validatedData['message'],
+            'name' => $validatedData['name'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+        ]);
+        return redirect('/');
     }
     
     
