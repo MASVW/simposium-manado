@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('lastName', 100)->nullable(true);
             $table->date('birthDate')->nullable(true);
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->boolean('isAdmin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

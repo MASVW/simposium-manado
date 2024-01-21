@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             "firstName" => 'Samuel',
             'lastName'=> 'Zakaria',
             'email' => 'samuelzakaria28@gmail.com',
+            'phone' => '+6281370309604',
             'isAdmin' => 1,
             'password'=> Hash::make('NightFURY28'),
         ]);
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             "firstName" => 'admin',
             'email' => 'admin@gmail.com',
             'isAdmin' => 1,
+            'phone' => "admin",
             'password'=> Hash::make('admin'),
         ]);
         Position::create([

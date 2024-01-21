@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PaymentMail extends Mailable
+class PaymentMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     
@@ -21,8 +21,6 @@ class PaymentMail extends Mailable
     public $firstName;
     public $lastName;
     public $eventName;
-    // public $email;
-    // public $paymentId;
 
     /**
      * Create a new message instance.
@@ -34,8 +32,6 @@ class PaymentMail extends Mailable
         $this->eventName = Datas::where('payments_id', $paymentId)->with('events', 'payments')->first();
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        // $this->email = $email;
-        // $this->paymentId = $paymentId;
     }
 
     /**

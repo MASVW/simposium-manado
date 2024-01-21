@@ -86,17 +86,18 @@ class Navigation extends Controller
     public function history()
     {
         $items = Bucket::where('users_id', auth()->user()->id)
-        ->with('prices.positions', 'events', 'payments', "datas")
-        ->whereHas('payments', function ($query) {
-            $query->where('status', '=', 'Paid');
-        })
-        ->get();
-    $unSuccess = Bucket::where('users_id', auth()->user()->id)
-        ->with('prices.positions', 'events', 'payments')
-        ->whereHas('payments', function ($query) {
-            $query->where('status', '=', 'Unpaid');
-        })
-        ->get();
+            ->with('prices.positions', 'events', 'payments', "datas")
+            ->whereHas('payments', function ($query) {
+                $query->where('status', '=', 'Paid');
+            })
+            ->get();
+
+        $unSuccess = Bucket::where('users_id', auth()->user()->id)
+            ->with('prices.positions', 'events', 'payments')
+            ->whereHas('payments', function ($query) {
+                $query->where('status', '=', 'Unpaid');
+            })
+            ->get();
         return view('history', 
         [
             'id'=> '1',
@@ -154,20 +155,18 @@ class Navigation extends Controller
                 'oldPass' => [
                     'required',
                     'string',
-                    'min:8',             // must be at least 10 characters in length
-                    'regex:/[a-z]/',      // must contain at least one lowercase letter
-                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                    'regex:/[0-9]/',      // must contain at least one digit
-                    // 'regex:/[@$!%*#?&]/', // must contain a special character
+                    'min:8',              
+                    'regex:/[a-z]/',      
+                    'regex:/[A-Z]/',      
+                    'regex:/[0-9]/', 
                 ],
                 'newPass'   => [
                     'required',
                     'string',
-                    'min:8',             // must be at least 10 characters in length
-                    'regex:/[a-z]/',      // must contain at least one lowercase letter
-                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                    'regex:/[0-9]/',      // must contain at least one digit
-                    // 'regex:/[@$!%*#?&]/', // must contain a special character
+                    'min:8',             
+                    'regex:/[a-z]/',    
+                    'regex:/[A-Z]/',   
+                    'regex:/[0-9]/',     
                 ],
                 'confPass'  => [
                     'required',
@@ -196,11 +195,11 @@ class Navigation extends Controller
     public function feedbackForm(Request $request){
         $validatedData = $request->validate([
             'name'=>['string','regex:/[a-z]/','regex:/[A-Z]/'],
-            'subject'=>['string', 'min:3', 'max:255'],
-            'message'=>['string', 'min:10', 'max:255'],
+            'subject'=>['required','string', 'min:3', 'max:255'],
+            'message'=>['required','string', 'min:10', 'max:255'],
             
             'phone'=>['string', 'min:10', 'max:255'],
-            'email' => 'required|email:dns|'
+            'email' => ['required', 'email']
         ]);
 
         Info::create([

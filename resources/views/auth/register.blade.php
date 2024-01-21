@@ -73,6 +73,22 @@
                                                         @enderror
                                                     </fieldset>
                                                     <fieldset class="mt-4">
+                                                        <p class="text-start text-dark">Nomor Telepon</p>
+                                                        <input
+                                                            value="{{old ('phone')}}"
+                                                            class="form-control @error('phone') is-invalid @enderror my-0"
+                                                            type="text"
+                                                            name="phone"
+                                                            placeholder="Masukkan nomor telepon"
+                                                            autocomplete="on"
+                                                            required="true">
+                                                        @error('phone')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
+                                                    </fieldset>
+                                                    <fieldset class="mt-4">
                                                         <p class="text-start text-dark">Tanggal Lahir</p>
                                                         <input
                                                             value="{{old ('birthDate')}}"

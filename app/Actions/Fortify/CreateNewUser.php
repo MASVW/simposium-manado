@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use PhpOffice\PhpSpreadsheet\Worksheet\Validations;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -23,12 +24,16 @@ class CreateNewUser implements CreatesNewUsers
     {
         $mail = new MailController();
         Validator::make($input, [
-            'firstName' => ['required', 'string', 'max:255'],
-            'lastName' => ['required', 'string', 'max:255'],
-            'birthDate' => ['required', 'date', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'firstName' => ['required', 'string', 'max:15'],
+            'lastName' => ['required', 'string', 'max:15'],
+            'birthDate' => ['required', 'date'],
+            'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
+            'phone' => ['required', 'string', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ],[
+            'email.unique' => __('Validation.custom.email.unique'),
+            'phone.unique' => __('Validation.custom.email.unique')
         ])->validate();
         
         $firstName = $input['firstName'];
@@ -41,6 +46,7 @@ class CreateNewUser implements CreatesNewUsers
             'lastName' => $lastName,
             'birthDate' => $input['birthDate'],
             'email' => $email,
+            'phone' => $input['phone'],
             'password' => Hash::make($input['password']),
         ]);
     }

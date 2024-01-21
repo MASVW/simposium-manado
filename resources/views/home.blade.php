@@ -211,88 +211,201 @@
             </div>
         </div>
 
-        <div id="contact-us" class="contact-us section">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 offset-lg-3">
-                <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                  <h6>Hubungi Kami</h6>
-                  <h4>Formulir umpan <em>balik</em></h4>
-                  <div class="line-dec"></div>
-                </div>
-              </div>
-              <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
-                <form id="contact" action="{{route('feedBack')}}" method="post">
-                  @csrf
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="contact-dec">
-                        <img src="assets/images/contact-dec-v3.png" alt="">
-                      </div>
-                    </div>
-                    
+          @auth
+          <div id="contact-us" class="contact-us section">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <h6>Hubungi Kami</h6>
+                    <h4>Formulir umpan <em>balik</em></h4>
+                    <div class="line-dec"></div>
                   </div>
-                  <div class="d-flex justify-content-center">
-                  <div class="col-lg-7">
-                      <div class="fill-form">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="info-post">
-                              <div class="icon">
-                                <img src="assets/images/email-icon.png" alt="">
-                                <a href="#">simposiummanado@gmail.com</a>
+                </div>
+                <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+                  <form id="contact" action="{{route('feedBack')}}" method="post">
+                    @csrf
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="contact-dec">
+                          <img src="assets/images/contact-dec-v3.png" alt="">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <div class="col-lg-7">
+                          <div class="fill-form">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/email-icon.png" alt="">
+                                    <a href="#">simposiummanado@gmail.com</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/phone-icon.png" alt="">
+                                    <a href="#">0813-7030-9604</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/location-icon.png" alt="">
+                                    <a href="#">Sam Ratulangi</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  <input class="@error('subject') is-invalid @enderror" name="subject" type="text" id="subject" placeholder="Subjek" autocomplete="on">
+                                  @error('subject')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                              </div>
+                                <fieldset>
+                                  <textarea class="@error('message') is-invalid @enderror" name="message" type="text" class="form-control" id="message" placeholder="Pesan" required=""></textarea>  
+                                  @error('message')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  <input type="hidden" name="name" value="{{auth()->user()->firstName}} {{auth()->user()->lastName}}">
+                                  <input type="hidden" name="email" value="{{auth()->user()->email}}">
+                                <input type="hidden" name="phone" value="{{auth()->user()->phone}}">
+                                  <input type="hidden" name="infoName" value="feedBack">
+                                  <button type="submit" id="form-submit" class="main-button ">Kirim!</button>
+                                </fieldset>
                               </div>
                             </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div class="info-post">
-                              <div class="icon">
-                                <img src="assets/images/phone-icon.png" alt="">
-                                <a href="#">0813-7030-9604</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div class="info-post">
-                              <div class="icon">
-                                <img src="assets/images/location-icon.png" alt="">
-                                <a href="#">Sam Ratulangi</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-12">
-                            <fieldset>
-                              <input type="name" name="name" id="name" placeholder="Nama" autocomplete="on" required>
-                            </fieldset>
-                            <fieldset>
-                              <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Alamt Surel" required>
-                            </fieldset>
-                            <fieldset>
-                              <input type="text" name="phone" id="phone" placeholder="Nomor Telepon" required>
-                            </fieldset>
-                            <fieldset>
-                              <input type="subject" name="subject" id="subject" placeholder="Subjek" autocomplete="on">
-                            </fieldset>
-                          </div>
-                            <fieldset>
-                              <textarea name="message" type="text" class="form-control" id="message" placeholder="Pesan" required=""></textarea>  
-                            </fieldset>
-                          <div class="col-lg-12">
-                            <fieldset>
-                              <input type="hidden" name="infoName" value="feedBack">
-                              <button type="submit" id="form-submit" class="main-button ">Kirim!</button>
-                            </fieldset>
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          @else
+          <div id="contact-us" class="contact-us section">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <h6>Hubungi Kami</h6>
+                    <h4>Formulir umpan <em>balik</em></h4>
+                    <div class="line-dec"></div>
+                  </div>
+                </div>
+                <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+                  <form id="contact" action="{{route('feedBack')}}" method="post">
+                    @csrf
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="contact-dec">
+                          <img src="assets/images/contact-dec-v3.png" alt="">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <div class="col-lg-7">
+                          <div class="fill-form">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/email-icon.png" alt="">
+                                    <a href="#">simposiummanado@gmail.com</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/phone-icon.png" alt="">
+                                    <a href="#">0813-7030-9604</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="info-post">
+                                  <div class="icon">
+                                    <img src="assets/images/location-icon.png" alt="">
+                                    <a href="#">Sam Ratulangi</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  <input class="@error('name') is-invalid @enderror" type="name" name="name" id="name" placeholder="Nama" autocomplete="on" required>
+                                  @error('name')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                                <fieldset>
+                                  <input class="@error('email') is-invalid @enderror" type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Alamat Surel" required>
+                                  @error('email')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                                <fieldset>
+                                  <input class="@error('phone') is-invalid @enderror" type="text" name="phone" id="phone" placeholder="Nomor Telepon" required>
+                                  @error('phone')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                                <fieldset>
+                                  <input class="@error('subject') is-invalid @enderror" name="subject" type="text" id="subject" placeholder="Subjek" autocomplete="on">
+                                  @error('subject')
+                                  <div class="invalid-feedback">
+                                      {{$message}}
+                                  </div>
+                                  @enderror
+                                </fieldset>
+                              </div>  
+                              <fieldset>
+                                <textarea class="@error('message') is-invalid @enderror" name="message" type="text" class="form-control" id="message" placeholder="Pesan" required=""></textarea>  
+                                @error('message')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                              </fieldset>
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  <input type="hidden" name="infoName" value="feedBack">
+                                  <button type="submit" id="form-submit" class="main-button ">Kirim!</button>
+                                </fieldset>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endauth
+
 
         @endif
 

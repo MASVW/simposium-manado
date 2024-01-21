@@ -12,14 +12,14 @@ class MailController extends Controller
 {
     public function register($firstName, $lastName, $email){
         Mail::to($email)
-            ->send(new RegisteredMail($firstName, $lastName));
+            ->queue(new RegisteredMail($firstName, $lastName));
     }
     public function successPayment($firstName, $lastName, $paymentId, $email){
         Mail::to($email)
-            ->send(new PaymentMail($firstName, $lastName, $paymentId));
+            ->queue(new PaymentMail($firstName, $lastName, $paymentId));
     }
     public function changePassword($firstName, $lastName, $email){
         Mail::to($email)
-            ->send(new ChangePasswordMail($firstName, $lastName));
+            ->queue(new ChangePasswordMail($firstName, $lastName));
     }
 }

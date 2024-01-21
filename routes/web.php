@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Sarans
+//Saran
 
 Route::post('/feedback', [Navigation::class, 'feedbackForm'])->name('feedBack');
 
