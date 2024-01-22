@@ -29,6 +29,10 @@ return [
         'phone' => [
             'unique' => 'Nomor telepon ini telah digunakan.'
         ],
+        'login' => [
+            'failed' => 'Login gagal. Mohon periksa kembali email dan kata sandi Anda.',
+        ],
+        // Tambahkan pesan kustom lain jika diperlukan
     ],
     'attributes' => [
         'firstName' => 'Nama Depan',
@@ -41,5 +45,8 @@ return [
         'subject' => 'Subjek',
         'message' => 'Pesan',
         'name' => 'Nama Lengkap',
+    ],
+    'fortify' => [
+        'failed' => 'Identitas ini tidak cocok dengan data kami.'
     ],
 ];

@@ -26,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [Navigation::class, 'home']);
+Route::get('/home', [Navigation::class, 'home'])
+    ->name('home');
 
 //admin
 
@@ -33,10 +36,10 @@ Route::middleware(['isAdmin'])->group(function (){
 
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
 
-
     Route::get('/dashboard/view-event', [AdminController::class, 'eventView']);
 
-    Route::get('/dashboard/manage-event', [AdminController::class, 'eventManage'])->name('manage-event');
+    Route::get('/dashboard/manage-event', [AdminController::class, 'eventManage'])
+        ->name('manage-event');
 
     Route::get('/dashboard/manage-event/addEvent', [EventDashboardController::class,'create']);
     Route::post('/dashboard/manage-event/addEvent', [EventDashboardController::class,'store']);
@@ -66,6 +69,7 @@ Route::middleware(['isAdmin'])->group(function (){
 
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/history', [Navigation::class, 'history']);
     
     Route::get('/profile', [Navigation::class, 'profile']);
@@ -81,7 +85,10 @@ Route::middleware(['auth'])->group(function () {
 
     
     Route::get('/checkout', [CheckOutController::class, 'index']);
+    
     Route::get('/checkout={payments:id}', [PaymentController::class, 'index']);
+
+    Route::post('/checkout/payment/{payments:id}', [PaymentController::class, 'update']);
 
     Route::post('/checkout/delete', [CheckOutController::class, 'delete'])
         ->name('delete_item');
@@ -89,7 +96,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/payment', [PaymentController::class, 'create'])
         ->name('payment');
 
-    Route::post('/checkout/payment/{payments:id}', [PaymentController::class, 'update']);
 
     Route::get('/invoice/{payments:id}', [PaymentController::class, 'invoice'])
         ->name('invoice');
@@ -111,8 +117,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function (){
-    Route::get('/', [Navigation::class, 'home'])
-        ->name('home');
+   
 
     Route::get('/about-us', [Navigation::class,'about']);
 
