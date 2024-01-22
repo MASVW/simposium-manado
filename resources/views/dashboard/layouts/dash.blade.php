@@ -170,7 +170,7 @@
 
                 </nav>
                 @yield('main') @yield('view-event') @yield('manage-event') @yield('edit-event') @yield('manage-payment')
-                @yield('about')
+                @yield('about') @yield('feedBack')
                 <!-- Main Content -->
             </div>
         </div>

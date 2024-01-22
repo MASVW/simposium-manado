@@ -33,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ],[
             'email.unique' => __('Validation.custom.email.unique'),
-            'phone.unique' => __('Validation.custom.email.unique')
+            'phone.unique' => __('Validation.custom.phone.unique')
         ])->validate();
         
         $firstName = $input['firstName'];

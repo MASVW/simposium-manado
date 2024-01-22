@@ -26,89 +26,108 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Saran
-
-Route::post('/feedback', [Navigation::class, 'feedbackForm'])->name('feedBack');
-
-Route::get('/', [Navigation::class, 'home']);
-Route::get('/home', [Navigation::class, 'home'])->name('home');
-Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);
-Route::get('/tag={event:slug}', [Navigation::class, 'withId']);
-
-Route::get('/profile', [Navigation::class, 'profile']);
-Route::get('/history', [Navigation::class, 'history']);
-
-Route::get('/profile/edit', [Navigation::class, 'editProfile'])->middleware('auth');
-Route::post('/profile/edit', [Navigation::class, 'editing'])->middleware('auth');
-
-Route::get('/profile/edit/pass', [Navigation::class, 'editingPass'])->middleware('auth');
-Route::post('/profile/edit/pass', [Navigation::class, 'editPass'])->middleware('auth');
-
-Route::get('/about-us', [Navigation::class,'about']);
-
-Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])->name('google.login');
-Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])->name('google.callback');
-
-Route::get('/logout', [Navigation::class, 'home']);
-Route::post('/logout', [LoginController::class,'logout'])->middleware('auth');
-
 
 //admin
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware('isAdmin');
+Route::middleware(['isAdmin'])->group(function (){
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
 
 
-Route::get('/checkout', [CheckOutController::class, 'index'])->middleware('auth');
-Route::get('/checkout={payments:id}', [PaymentController::class, 'index'])->middleware('auth');
+    Route::get('/dashboard/view-event', [AdminController::class, 'eventView']);
 
-Route::post('/checkout/delete', [CheckOutController::class, 'delete'])->name('delete_item')->middleware('auth');
+    Route::get('/dashboard/manage-event', [AdminController::class, 'eventManage'])->name('manage-event');
 
-Route::post('/checkout/payment', [PaymentController::class, 'create'])->name('payment')->middleware('auth');
-Route::post('/checkout/payment/{payments:id}', [PaymentController::class, 'update'])->middleware('auth');
+    Route::get('/dashboard/manage-event/addEvent', [EventDashboardController::class,'create']);
+    Route::post('/dashboard/manage-event/addEvent', [EventDashboardController::class,'store']);
 
-Route::get('/invoice/{payments:id}', [PaymentController::class, 'invoice'])->name('invoice')->middleware('auth');
+    Route::get('/dashboard/manage-event/tag={events:slug}', [EventDashboardController::class,'index']);
+    Route::put('/dashboard/manage-event/tag={events:id}', [EventDashboardController::class,'update']);
+    Route::delete('/dashboard/manage-event/tag={events:id}/delete', [EventDashboardController::class,'destroy']);
 
-Route::get('/{payments:id}/viewForm', [FormControll::class, 'index'])->name('viewForm')->middleware('auth');
+    Route::get('/dashboard/manage-event/slug', [EventDashboardController::class,'checkSlug']);
 
-Route::get('/{payments:id}/fillForm', [FormControll::class, 'index'])->name('form')->middleware('auth');
-Route::post('/{payments:id}/fillForm', [FormControll::class, 'store'])->middleware('auth');
-Route::put('/{payments:id}/fillForm', [FormControll::class, 'update'])->middleware('auth');
+    Route::put('/dashboard/manage-event/tag={events:slug}/pricePut', [PricesDashboardController::class,'update']);
+    Route::post('/dashboard/manage-event/tag={events:slug}/Addprice', [PricesDashboardController::class,'create']);
+    // delete
+    Route::post('/dashboard/manage-event/tag={events:slug}/priceDelete', [PricesDashboardController::class,'destroy']);
 
-Route::post('/addtoBucket/tag={event:slug}', [BucketController::class, 'create'])->middleware('auth');
-Route::post('/bucket/delete', [BucketController::class, 'delete'])->middleware('auth');
+    Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment']);
 
-Route::get('/dashboard/view-event', [AdminController::class, 'eventView'])->middleware('isAdmin');
+    Route::get('/dashboard/manage-about', [AboutController::class, 'index']);
+    Route::put('/dashboard/manage-about', [AboutController::class, 'update']);
 
-Route::get('/dashboard/manage-event', [AdminController::class, 'eventManage'])->name('manage-event')->middleware('isAdmin');
-
-Route::get('/dashboard/manage-event/addEvent', [EventDashboardController::class,'create'])->middleware('isAdmin');
-Route::post('/dashboard/manage-event/addEvent', [EventDashboardController::class,'store'])->middleware('isAdmin');
-
-Route::get('/dashboard/manage-event/tag={events:slug}', [EventDashboardController::class,'index'])->middleware('isAdmin');
-Route::put('/dashboard/manage-event/tag={events:id}', [EventDashboardController::class,'update'])->middleware('isAdmin');
-Route::delete('/dashboard/manage-event/tag={events:id}/delete', [EventDashboardController::class,'destroy'])->middleware('isAdmin');
-
-Route::get('/dashboard/manage-event/slug', [EventDashboardController::class,'checkSlug'])->middleware('isAdmin');
-
-Route::put('/dashboard/manage-event/tag={events:slug}/pricePut', [PricesDashboardController::class,'update'])->middleware('isAdmin');
-Route::post('/dashboard/manage-event/tag={events:slug}/Addprice', [PricesDashboardController::class,'create'])->middleware();
-// delete
-Route::post('/dashboard/manage-event/tag={events:slug}/priceDelete', [PricesDashboardController::class,'destroy']);
-
-Route::get('/dashboard/manage-payment', [AdminController::class, 'viewPayment'])->middleware('isAdmin');
-
-Route::get('/dashboard/manage-about', [AboutController::class, 'index'])->middleware('isAdmin');
-Route::put('/dashboard/manage-about', [AboutController::class, 'update'])->middleware('isAdmin');
-
-
-
-
-//Exporting Excel
-
-Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
-    ->name('excelExportAll')
-    ->middleware('isAdmin');
+    Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
+        ->name('excelExportAll');
     
-Route::post('dashboard/export-excel/participant', [ExcelExport::class, 'exportParticipant'])
-    ->name('excelExportParticipant')
-    ->middleware('isAdmin');
+    Route::post('dashboard/export-excel/participant', [ExcelExport::class, 'exportParticipant'])
+        ->name('excelExportParticipant');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/history', [Navigation::class, 'history']);
+    
+    Route::get('/profile', [Navigation::class, 'profile']);
+
+    Route::get('/profile/edit', [Navigation::class, 'editProfile']);
+    Route::post('/profile/edit', [Navigation::class, 'editing'])
+        ->name('editProfile');
+
+    Route::get('/profile/edit/pass', [Navigation::class, 'editingPass']);
+    Route::post('/profile/edit/pass', [Navigation::class, 'editPass']);
+
+    Route::post('/logout', [LoginController::class,'logout']);
+
+    
+    Route::get('/checkout', [CheckOutController::class, 'index']);
+    Route::get('/checkout={payments:id}', [PaymentController::class, 'index']);
+
+    Route::post('/checkout/delete', [CheckOutController::class, 'delete'])
+        ->name('delete_item');
+
+    Route::post('/checkout/payment', [PaymentController::class, 'create'])
+        ->name('payment');
+
+    Route::post('/checkout/payment/{payments:id}', [PaymentController::class, 'update']);
+
+    Route::get('/invoice/{payments:id}', [PaymentController::class, 'invoice'])
+        ->name('invoice');
+
+    Route::get('/{payments:id}/viewForm', [FormControll::class, 'index'])
+        ->name('viewForm');
+
+    Route::get('/{payments:id}/fillForm', [FormControll::class, 'index'])
+        ->name('form');
+
+    Route::post('/{payments:id}/fillForm', [FormControll::class, 'store']);
+
+    Route::put('/{payments:id}/fillForm', [FormControll::class, 'update']);
+
+    Route::post('/addtoBucket/tag={event:slug}', [BucketController::class, 'create']);
+
+    Route::post('/bucket/delete', [BucketController::class, 'delete']);
+
+});
+
+Route::middleware(['guest'])->group(function (){
+    Route::get('/', [Navigation::class, 'home'])
+        ->name('home');
+
+    Route::get('/about-us', [Navigation::class,'about']);
+
+    Route::get('/logout', [Navigation::class, 'home']);
+
+    Route::get('/auth/google', [LoginController::class,'redirectToGoogle'])
+        ->name('google.login');
+
+    Route::get('/auth/google/callback', [LoginController::class,'googleCallback'])
+        ->name('google.callback');
+
+    Route::get('/tag={event:slug}', [Navigation::class, 'withId']);
+
+    Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);
+
+    Route::post('/feedback', [Navigation::class, 'feedbackForm'])
+        ->name('navigation.feedBack');
+});
