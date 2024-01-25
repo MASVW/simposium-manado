@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\EventDashboardController;
 use App\Http\Controllers\ExcelExport;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FormControll;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CheckOutController;
@@ -29,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Navigation::class, 'home']);
 Route::get('/home', [Navigation::class, 'home'])
     ->name('home');
+    
+Route::post('/feedback', [Navigation::class, 'feedbackForm'])
+    ->name('navigation.feedBack');
 
 //admin
 
@@ -59,6 +63,9 @@ Route::middleware(['isAdmin'])->group(function (){
 
     Route::get('/dashboard/manage-about', [AboutController::class, 'index']);
     Route::put('/dashboard/manage-about', [AboutController::class, 'update']);
+
+    Route::get('/dashboard/feedBack', [FeedbackController::class, 'index']);
+    Route::get('/dashboard/feedBack/detail={item:id}', [FeedbackController::class, 'show']);
 
     Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
         ->name('excelExportAll');
@@ -133,6 +140,5 @@ Route::middleware(['guest'])->group(function (){
 
     Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);
 
-    Route::post('/feedback', [Navigation::class, 'feedbackForm'])
-        ->name('navigation.feedBack');
+    
 });

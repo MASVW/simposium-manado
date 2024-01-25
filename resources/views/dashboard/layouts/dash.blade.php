@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,6 +100,12 @@
                     Information
                 </div>
 
+                <li class="nav-item {{ ($title === 'Feedback Panel') ? 'active' : ''}}">
+                    <a class="nav-link collapsed" href="/dashboard/feedBack">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Feedback Panel</span>
+                    </a>
+                </li>
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item {{ ($title === 'Information') ? 'active' : ''}}">
                     <a class="nav-link collapsed" href="/dashboard/manage-about">
@@ -108,7 +113,7 @@
                         <span>Manage Information</span>
                     </a>
                 </li>
-
+                
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -170,7 +175,7 @@
 
                 </nav>
                 @yield('main') @yield('view-event') @yield('manage-event') @yield('edit-event') @yield('manage-payment')
-                @yield('about') @yield('feedBack')
+                @yield('about') @yield('feedBack') @yield('detailsFeedback')
                 <!-- Main Content -->
             </div>
         </div>

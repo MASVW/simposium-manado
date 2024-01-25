@@ -196,20 +196,31 @@ class Navigation extends Controller
         $validatedData = $request->validate([
             'name'=>['string','regex:/[a-z]/','regex:/[A-Z]/'],
             'subject'=>['required','string', 'min:3', 'max:255'],
-            'message'=>['required','string', 'min:10', 'max:255'],
-            
+            'message'=>['required','string', 'min:5', 'max:255'],
             'phone'=>['string', 'min:10', 'max:255'],
             'email' => ['required', 'email']
         ]);
-
-        Info::create([
-            'infoName' => $request->infoName,
-            'info' => $validatedData['subject'],
-            'message' => $validatedData['message'],
-            'name' => $validatedData['name'],
-            'phone' => $validatedData['phone'],
-            'email' => $validatedData['email'],
-        ]);
+        if($request->users_id){
+            Info::create([
+                'infoName' => $request->infoName,
+                'info' => $validatedData['subject'],
+                'message' => $validatedData['message'],
+                'name' => $validatedData['name'],
+                'phone' => $validatedData['phone'],
+                'email' => $validatedData['email'],
+                'users_id' => $request->users_id
+            ]);
+        }
+        else{
+            Info::create([
+                'infoName' => $request->infoName,
+                'info' => $validatedData['subject'],
+                'message' => $validatedData['message'],
+                'name' => $validatedData['name'],
+                'phone' => $validatedData['phone'],
+                'email' => $validatedData['email'],
+            ]);
+        };
         return redirect('/');
     }
     

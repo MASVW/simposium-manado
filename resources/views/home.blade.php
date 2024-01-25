@@ -281,8 +281,9 @@
                                 </fieldset>
                               <div class="col-lg-12">
                                 <fieldset>
-                                  <input type="hidden" name="name" value="{{auth()->user()->firstName}} {{auth()->user()->lastName}}">
+                                  <input type="hidden" name="name" value="{{auth()->user()->firstName}} {{auth()->user()?->lastName}}">
                                   <input type="hidden" name="email" value="{{auth()->user()->email}}">
+                                  <input type="hidden" name="users_id" value="{{auth()->user()->id}}">
                                 <input type="hidden" name="phone" value="{{auth()->user()->phone}}">
                                   <input type="hidden" name="infoName" value="feedBack">
                                   <button type="submit" id="form-submit" class="main-button ">Kirim!</button>
