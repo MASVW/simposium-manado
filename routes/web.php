@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlastEmailsController;
 use App\Http\Controllers\BucketController;
 use App\Http\Controllers\EventDashboardController;
 use App\Http\Controllers\ExcelExport;
@@ -64,9 +65,15 @@ Route::middleware(['isAdmin'])->group(function (){
     Route::get('/dashboard/manage-about', [AboutController::class, 'index']);
     Route::put('/dashboard/manage-about', [AboutController::class, 'update']);
 
+    //Feed Back
     Route::get('/dashboard/feedBack', [FeedbackController::class, 'index']);
     Route::get('/dashboard/feedBack/detail={item:id}', [FeedbackController::class, 'show']);
 
+    //Emails
+    Route::get('dashboard/blast-email', [BlastEmailsController::class, 'index'])->name('admin.blastEmail');
+    Route::get('dashboard/blast-email/showFormat', [BlastEmailsController::class, 'show'])->name('admin.blastEmail.show');
+
+    //Excel
     Route::get('dashboard/export-excel', [ExcelExport::class, 'exportUser'])
         ->name('excelExportAll');
     
@@ -124,8 +131,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function (){
-   
-
     Route::get('/about-us', [Navigation::class,'about']);
 
     Route::get('/logout', [Navigation::class, 'home']);
@@ -139,6 +144,6 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/tag={event:slug}', [Navigation::class, 'withId']);
 
     Route::post('/tag={event:slug}/price', [Navigation::class, 'homePrice']);
-
-    
 });
+
+  Route::resource('/dashboard/emails', 'EmailController');

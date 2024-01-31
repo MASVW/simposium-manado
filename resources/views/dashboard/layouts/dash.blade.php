@@ -58,7 +58,9 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Events
+                    <div class="d-flex justify-content-center">
+                        Events
+                    </div>    
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -82,7 +84,9 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Report
+                    <div class="d-flex justify-content-center">
+                        Report
+                    </div>
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -97,7 +101,33 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Information
+                    <div class="d-flex justify-content-center">
+                        Information
+                    </div>
+                </div>
+
+                <li class="nav-item {{ ($title === 'Blasting Email') ? 'active' : ''}}">
+                    <a class="nav-link collapsed" href="{{route('admin.blastEmail')}}">
+                        <i class="fas fa-mail-bulk"></i>
+                        <span>Blasting Email</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ ($title === 'Edit Email') ? 'active' : ''}}">
+                    <a class="nav-link collapsed" href="{{route('admin.blastEmail.show')}}">
+                        <i class="fas fa-mail-bulk"></i>
+                        <span>Edit Email</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    <div class="d-flex justify-content-center">
+                        Information
+                    </div>
                 </div>
 
                 <li class="nav-item {{ ($title === 'Feedback Panel') ? 'active' : ''}}">
@@ -107,6 +137,7 @@
                     </a>
                 </li>
                 <!-- Nav Item - Pages Collapse Menu -->
+                
                 <li class="nav-item {{ ($title === 'Information') ? 'active' : ''}}">
                     <a class="nav-link collapsed" href="/dashboard/manage-about">
                         <i class="fas fa-info"></i>
@@ -114,6 +145,7 @@
                     </a>
                 </li>
                 
+
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -175,7 +207,7 @@
 
                 </nav>
                 @yield('main') @yield('view-event') @yield('manage-event') @yield('edit-event') @yield('manage-payment')
-                @yield('about') @yield('feedBack') @yield('detailsFeedback')
+                @yield('about') @yield('feedBack') @yield('detailsFeedback') @yield('blast-emails') @yield('edit-emails')
                 <!-- Main Content -->
             </div>
         </div>

@@ -29,7 +29,6 @@
                            <!-- <td>{{$item->info}}</td> -->
                            <td>{{$item->message}}</td>
                            
-                           <!-- <td>{{$newFormat}}</td> -->
                            <td>
                               <div class="d-flex justify-content-center">
                                  <a href="/dashboard/feedBack/detail={{$item->id}}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">See Detail</a>
